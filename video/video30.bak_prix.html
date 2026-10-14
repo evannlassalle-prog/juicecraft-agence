@@ -1,0 +1,1166 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><title>juicecraft — spot 15 s</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mona+Sans:wdth,wght@75..125,200..900&family=Instrument+Sans:wdth,wght@75..100,400..700&family=Instrument+Serif:ital@0;1&family=Geist+Mono:wght@400;500&display=block">
+<style>
+:root{--paper:#F2F2EF;--ink:#131116;--ink2:#1C1A21;--orange:#FF5A1F;--mango:#FFB21A;--berry:#EE2A7B;--grape:#7B3FF2;--leaf:#1FA971;--mute:#65616C;
+--juice:linear-gradient(100deg,#FFB21A 0%,#FF5A1F 34%,#EE2A7B 70%,#7B3FF2 100%);
+--fd:"Mona Sans","Liberation Sans",sans-serif;--fb:"Instrument Sans","Liberation Sans",sans-serif;--fm:"Geist Mono","Liberation Mono",monospace;--fs:"Instrument Serif","Liberation Serif",serif}
+*{box-sizing:border-box}
+html,body{margin:0;background:#000;overflow:hidden}
+#stage{position:relative;overflow:hidden;background:var(--paper);color:var(--ink);font-family:var(--fb);-webkit-font-smoothing:antialiased}
+.layer{position:absolute;left:0;top:0;width:100%;height:100%}
+.abs{position:absolute;left:0;top:0}
+canvas.liq{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none}
+.kt{position:absolute;left:0;top:0;font-family:var(--fd);font-weight:800;font-stretch:92%;letter-spacing:-.045em;line-height:.94;white-space:nowrap}
+.ln{display:block;overflow:hidden;padding:0 .08em .26em 0;margin-bottom:-.26em}
+.ln>span{display:inline-block;will-change:transform;transform-origin:0 100%}
+.grad{background:var(--juice);-webkit-background-clip:text;background-clip:text;color:transparent;padding-right:.04em}
+.mono{font-family:var(--fm)}
+/* ---------- S1 old site ---------- */
+#old{position:absolute;left:0;top:0;border-radius:.8rem;overflow:hidden;background:#C9C9C9;box-shadow:0 .4rem 1rem rgba(19,17,22,.12),0 4rem 8rem -2rem rgba(19,17,22,.45);transform-origin:50% 50%}
+#old .ob{height:4.4rem;display:flex;align-items:center;gap:.8rem;padding:0 1.4rem;background:linear-gradient(#E9E9E9,#C6C6C6);border-bottom:1px solid #8E8E8E}
+#old .ob i{width:1.3rem;height:1.3rem;border-radius:50%;background:#A9A9A9;flex:none}
+#old .ob span{margin-left:1rem;flex:1;background:#fff;border:2px inset #A0A0A0;font:1.6rem/2.6rem "Liberation Serif",serif;padding:0 .8rem;color:#333;white-space:nowrap;overflow:hidden}
+.o-top{background:linear-gradient(#000080,#1084d0);color:#FF0;text-align:center;padding:1.5rem;font:italic 700 3.3rem/1 "Liberation Serif",serif;text-shadow:.2rem .2rem 0 #000}
+.o-body{display:grid;grid-template-columns:30% 1fr;gap:1.4rem;padding:1.6rem;font:2.1rem/1.35 "Liberation Serif",serif;color:#000}
+.o-nav{display:grid;gap:.5rem;align-content:start;background:#E4E4E4;border:3px outset #F2F2F2;padding:1rem 1.2rem}
+.o-nav a,.o-main a{color:#0000EE;text-decoration:underline}
+.o-main{background:#E4E4E4;border:3px outset #F2F2F2;padding:1.2rem 1.4rem;display:grid;gap:1.1rem;align-content:start}
+.o-main b.t{font-size:3rem;font-family:"Liberation Serif",serif}
+.o-stripe{background:repeating-linear-gradient(45deg,#FFD400 0 1.5rem,#111 1.5rem 3rem);color:#fff;text-shadow:0 0 .3rem #000,0 0 .3rem #000;font:700 1.9rem/1 "Liberation Sans",sans-serif;padding:.9rem;text-align:center;letter-spacing:.12em}
+.o-row{display:flex;gap:1.2rem;align-items:center;flex-wrap:wrap}
+.o-btn{padding:.3rem 1.4rem;border:3px outset #F2F2F2;background:#D8D8D8;font-size:1.9rem}
+.o-count{padding:.2rem .7rem;background:#000;color:#0F0;font:1.9rem "Liberation Mono",monospace}
+#sadrop{position:absolute;left:0;top:0;width:.2em;height:.27em;border-radius:50% 50% 50% 50%/62% 62% 38% 38%;background:#8A8692;box-shadow:inset 0 0 0 .012em #6E6A77;transform-origin:50% 0}
+/* ---------- S2 press plates ---------- */
+.plate{position:absolute;left:-4%;width:108%;background:linear-gradient(180deg,#2A2630,#17141B 55%,#0E0C11);overflow:hidden}
+.plate::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(255,255,255,.018) 0 2px,transparent 2px 7px)}
+#pt{border-bottom:.7rem solid var(--orange);box-shadow:0 1.6rem 4rem rgba(0,0,0,.45)}
+#pb{border-top:.7rem solid var(--orange);box-shadow:0 -1.6rem 4rem rgba(0,0,0,.45)}
+.plate .eng{position:absolute;right:9%;font:500 1.9rem/1 var(--fm);color:rgba(243,241,245,.32);letter-spacing:.42em;text-transform:uppercase;z-index:1}
+.plate .bolt{position:absolute;width:2.4rem;height:2.4rem;border-radius:50%;background:radial-gradient(circle at 35% 35%,#4A4550,#1A171E 70%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.06);z-index:1}
+#pt .eng{bottom:3rem}#pb .eng{top:3rem}
+#pt .bolt{bottom:2.6rem}#pb .bolt{top:2.6rem}
+/* ---------- S3 wordmark ---------- */
+#w3{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:2.4rem}
+#w3 svg{flex:none}
+.wm{font-family:var(--fd);font-weight:800;letter-spacing:-.055em;line-height:1;display:flex;white-space:nowrap}
+.wm span{display:inline-block;transform-origin:50% 100%}
+#flash{position:absolute;inset:0;background:#fff;pointer-events:none}
+/* ---------- frame (S3 + S4) ---------- */
+#fr{position:absolute;left:0;top:0;border-radius:2rem;background:#fff;overflow:hidden;display:flex;flex-direction:column;transform-origin:50% 50%;box-shadow:0 .2rem .4rem rgba(19,17,22,.06),0 2.4rem 4.8rem -1.2rem rgba(19,17,22,.22),0 7rem 12rem -4rem rgba(19,17,22,.4)}
+.fbar{flex:none;height:4.6rem;display:flex;align-items:center;gap:.8rem;padding:0 1.6rem;background:#F4F3F1;border-bottom:1px solid rgba(19,17,22,.07)}
+.fbar>i{flex:none;width:1.15rem;height:1.15rem;border-radius:50%}
+.fbar>i:nth-child(1){background:#FF5F57}.fbar>i:nth-child(2){background:#FEBC2E}.fbar>i:nth-child(3){background:#28C840}
+.url{flex:1;min-width:0;display:flex;align-items:center;justify-content:center;gap:.6rem;margin:0 1rem;height:2.8rem;border-radius:.8rem;background:#fff;font:500 1.45rem/1 var(--fm);color:#57545C;white-space:nowrap;overflow:hidden}
+.url svg{width:1.3rem;height:1.3rem;flex:none;color:#A29EA7}
+.url.secure svg{color:var(--leaf)}
+.url.secure b{color:var(--leaf);font-weight:500}
+.fbody{position:relative;flex:1;overflow:hidden;container-type:size;container-name:fb;isolation:isolate}
+.pn{position:absolute;left:0;top:0;width:100%;height:100%;overflow:hidden;visibility:hidden}
+.pshade{position:absolute;inset:0;background:#131116;pointer-events:none}
+#pn0 img{width:100%;height:100%;object-fit:cover;object-position:50% 0;display:block}
+.wipe{position:absolute;top:-6%;bottom:-6%;left:0;width:58%;background:var(--juice);z-index:20;visibility:hidden;border-radius:0 52% 52% 0/0 46% 46% 0;box-shadow:inset -3rem 0 5rem -2rem rgba(255,255,255,.25)}
+/* pn1 — mini site, three identities */
+#pn1{--s-bg:#FAF6EF;--s-fg:#2A2017;--s-mute:#8C7C69;--s-acc:#8E5428;--s-btn:#FAF6EF;--s-card:#F0E7D9;--s-tfont:var(--fs);--s-bfont:var(--fb);--s-tw:400;--s-ts:6.6cqw;--s-tt:none;--s-tls:-.01em;--s-r:99px;--s-ir:1.6cqw;--s-img:repeating-linear-gradient(96deg,#C99566 0 .7rem,#B98250 .7rem 1rem,#D3A475 1rem 1.7rem,#C08A58 1.7rem 2.1rem)}
+#pn1[data-s="bold"]{--s-bg:#141217;--s-fg:#FFFFFF;--s-mute:#9E99A6;--s-acc:#FF5A1F;--s-btn:#141217;--s-card:#221F27;--s-tfont:var(--fd);--s-tw:900;--s-ts:7.4cqw;--s-tt:uppercase;--s-tls:-.05em;--s-r:.6rem;--s-ir:.6cqw;--s-img:radial-gradient(circle at 70% 35%,#FFB21A 0 18%,transparent 19%),linear-gradient(135deg,#FF5A1F,#EE2A7B 60%,#7B3FF2)}
+#pn1[data-s="minimal"]{--s-bg:#FFFFFF;--s-fg:#111111;--s-mute:#8D8D8D;--s-acc:#111111;--s-btn:#FFFFFF;--s-card:#F4F4F4;--s-tfont:var(--fm);--s-bfont:var(--fm);--s-tw:500;--s-ts:4.7cqw;--s-tt:none;--s-tls:-.04em;--s-r:0;--s-ir:0;--s-img:repeating-linear-gradient(45deg,#E6E6E6 0 1px,#FAFAFA 1px .9rem)}
+.ms{height:100%;background:var(--s-bg);color:var(--s-fg);font-family:var(--s-bfont);padding:3.4cqw 4.2cqw;display:grid;grid-template-rows:auto 1fr auto;gap:3.4cqw}
+.ms-nav{display:flex;align-items:center;gap:3cqw;font-size:1.9cqw}
+.ms-logo{font-family:var(--s-tfont);font-weight:var(--s-tw);font-size:3.1cqw;letter-spacing:var(--s-tls);text-transform:var(--s-tt)}
+.ms-links{display:flex;gap:2.4cqw;margin-left:auto;color:var(--s-mute)}
+.ms-btn{padding:1cqw 2.2cqw;border-radius:var(--s-r);background:var(--s-acc);color:var(--s-btn)}
+.ms-hero{display:grid;grid-template-columns:1.1fr 1fr;gap:3.4cqw;min-height:0}
+.ms-text{display:flex;flex-direction:column;justify-content:center;gap:2.2cqw;align-items:flex-start}
+.ms-kicker{font-size:1.6cqw;letter-spacing:.14em;text-transform:uppercase;color:var(--s-acc)}
+.ms-title{font-family:var(--s-tfont);font-weight:var(--s-tw);font-size:var(--s-ts);line-height:.98;letter-spacing:var(--s-tls);text-transform:var(--s-tt)}
+.ms-cta{font-size:1.9cqw;padding:1.4cqw 2.6cqw;border-radius:var(--s-r);border:1px solid var(--s-fg)}
+.ms-img{border-radius:var(--s-ir);background:var(--s-img);min-height:0}
+.ms-cards{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2cqw;font-size:1.8cqw}
+.ms-cards span{display:grid;gap:1.4cqw;padding:1.8cqw;border-radius:calc(var(--s-ir)*.7);background:var(--s-card)}
+.ms-cards i{display:block;height:5cqw;border-radius:calc(var(--s-ir)*.5);background:var(--s-img);opacity:.85}
+/* pn2 — responsive site (reflows by container width) */
+.rs{height:100%;background:#FBFBF9;display:flex;flex-direction:column;gap:2.4rem;padding:2.6rem 3rem}
+.rs-nav{display:flex;align-items:center;gap:2.4rem;font-size:1.7rem}
+.rs-logo{font-family:var(--fd);font-weight:800;font-size:2.5rem;letter-spacing:-.045em;white-space:nowrap}
+.rs-links{display:flex;gap:2.2rem;margin-left:auto;color:#65616C;white-space:nowrap}
+.rs-cta{padding:.9rem 1.8rem;border-radius:99px;background:#131116;color:#fff;font-size:1.5rem;font-weight:600;white-space:nowrap}
+.rs-burger{display:none;margin-left:auto;width:3.8rem;height:3.8rem;border-radius:50%;background:#131116;position:relative;flex:none}
+.rs-burger::before,.rs-burger::after{content:"";position:absolute;left:1.1rem;right:1.1rem;height:.22rem;background:#fff;border-radius:2px}
+.rs-burger::before{top:1.5rem}.rs-burger::after{top:2.1rem}
+.rs-hero{flex:1;min-height:0;display:grid;grid-template-columns:1.1fr 1fr;gap:2.6rem;align-items:center}
+.rs-title{font-family:var(--fd);font-weight:800;font-size:4.8rem;line-height:.98;letter-spacing:-.045em}
+.rs-p{font-size:1.65rem;color:#65616C;margin-top:1.4rem;line-height:1.4}
+.rs-btn{display:inline-block;margin-top:2rem;padding:1.2rem 2.2rem;border-radius:99px;background:var(--orange);color:#131116;font-weight:600;font-size:1.6rem}
+.rs-img{height:100%;min-height:12rem;border-radius:1.6rem;background:radial-gradient(circle at 72% 30%,#FFE08A 0 12%,transparent 13%),linear-gradient(150deg,#FFB21A,#FF5A1F 50%,#EE2A7B)}
+.rs-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem}
+.rs-cards span{padding:1.6rem 1.8rem;border-radius:1.4rem;background:#EFEDE8;font-weight:600;font-size:1.65rem;white-space:nowrap}
+@container fb (max-width:700px){.rs-cards{grid-template-columns:1fr 1fr}.rs-cards span:last-child{display:none}.rs-title{font-size:4.2rem}.rs-links{display:none}.rs-burger{display:block}.rs-cta{margin-left:auto}.rs-burger{margin-left:0}}
+@container fb (max-width:440px){.rs{padding:2rem 2rem;gap:1.6rem}.rs-cta{display:none}.rs-burger{margin-left:auto}.rs-hero{flex:none;display:flex;flex-direction:column;gap:1.6rem;align-items:stretch}.rs-img{order:-1;flex:none;height:17rem;min-height:0;aspect-ratio:auto}.rs-title{font-size:3.5rem}.rs-p{margin-top:1rem}.rs-btn{margin-top:1.4rem}.rs-cards{grid-template-columns:1fr}.rs-cards span:nth-child(n+2){display:none}}
+/* pn3 — performance */
+#pn3{background:#131116;color:#F3F1F5}
+.gz{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2.4cqh;padding:4cqh 6cqw}
+.gwrap{position:relative;width:min(60cqw,80cqh)}
+.gsvg{width:100%;display:block;overflow:visible}
+.gbg{fill:none;stroke:rgba(243,241,245,.1);stroke-width:14;stroke-linecap:round}
+.gfg{fill:none;stroke:url(#gg);stroke-width:14;stroke-linecap:round}
+.gtick{stroke:rgba(243,241,245,.22);stroke-width:2}
+.gnum{position:absolute;left:0;right:0;bottom:-2%;text-align:center;font-family:var(--fd);font-weight:800;letter-spacing:-.05em;line-height:1;font-variant-numeric:tabular-nums}
+.gnum b{font-size:min(15cqw,22cqh)}
+.glab{font:500 min(1.9cqw,2.8cqh)/1 var(--fm);letter-spacing:.16em;text-transform:uppercase;color:#A29EAA}
+.gmet{display:grid;grid-template-columns:repeat(3,1fr);gap:2.4cqw;width:min(80cqw,110cqh);margin-top:1cqh}
+.gmet div{display:grid;gap:1cqh;font-size:min(1.9cqw,2.7cqh);color:#A29EAA}
+.gmet div b{color:#F3F1F5;font-weight:600;font-family:var(--fm);font-weight:500}
+.gmet i{display:block;height:.8cqh;min-height:5px;border-radius:99px;background:rgba(243,241,245,.1);overflow:hidden}
+.gmet em{display:block;height:100%;width:0;border-radius:inherit;background:var(--leaf)}
+/* pn4 — security */
+#pn4{background:#FBFBF9}
+.lz{position:relative;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4cqh}
+.lkw{position:relative;display:grid;place-items:center}
+.lring{position:absolute;width:30cqh;height:30cqh;border-radius:50%;border:.5rem solid var(--leaf);opacity:0}
+.lk{height:36cqh;width:auto;overflow:visible}
+.lpill{display:inline-flex;align-items:center;gap:1rem;padding:1.2rem 2.2rem;border-radius:99px;background:#F1F0EC;border:1px solid rgba(19,17,22,.1);font:500 min(2.4cqw,3.6cqh)/1 var(--fm);color:#65616C}
+.lpill svg{width:1.8rem;height:1.8rem}
+.lpill{position:relative;z-index:1}.lpill.on{color:#131116}.lpill.on svg{color:var(--leaf)}
+.lcard{position:absolute;right:5cqw;bottom:6cqh;display:flex;align-items:center;gap:1.4rem;padding:1.4rem 2rem 1.4rem 1.4rem;border-radius:1.6rem;background:#fff;border:1px solid rgba(19,17,22,.08);box-shadow:0 2rem 4rem -1.8rem rgba(19,17,22,.4);font-size:1.7rem;line-height:1.25}
+.lcard i{display:grid;place-items:center;width:4rem;height:4rem;border-radius:1.1rem;background:var(--grape);color:#fff;font-style:normal;font-weight:700}
+.lcard b{display:block;font-weight:600}.lcard small{color:#65616C;font-size:1.45rem}
+.port .lcard{right:12cqw;bottom:12cqh}
+/* pn5 — search */
+#pn5{background:#FFFFFF}
+.sz{height:100%;display:flex;flex-direction:column;justify-content:center;gap:3.2cqh;padding:6cqh 6cqw}
+.sbar{display:flex;align-items:center;gap:1.4rem;padding:1.6rem 2.4rem;border-radius:99px;border:1px solid #DEDCD7;box-shadow:0 .6rem 2rem -1rem rgba(19,17,22,.25);font-size:min(3.3cqw,5.2cqh);color:#131116}
+.sbar svg{width:2.4rem;height:2.4rem;color:#8A8790;flex:none}
+.caret{display:inline-block;width:2px;height:1.1em;background:#131116;margin-left:2px;vertical-align:-.15em}
+.sres{display:grid;gap:.8rem;padding:2.4rem 2.8rem;border-radius:1.8rem;font-size:min(2.5cqw,3.9cqh);line-height:1.35}
+.sres .u{font-family:var(--fm);font-size:.82em;color:#65616C}
+.sres b{font-size:1.25em;color:#1A4FD6;font-weight:600}
+.sres .d{color:#57545C}
+#sr1{position:relative;background:#fff}
+#sr1::before{content:"";position:absolute;inset:-3px;border-radius:2rem;padding:3px;background:var(--juice);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:var(--ring,0)}
+.qw{display:inline-flex;align-items:center}
+.fchips{display:flex;flex-wrap:wrap;gap:1rem}.fchips span{padding:.8rem 1.6rem;border-radius:99px;background:#E8F5EE;color:#17724B;font-weight:600}.fchips span::before{content:"✓ "}
+.snote{margin:1cqh 0 0;font:500 min(1.7cqw,2.5cqh)/1.2 var(--fm);color:#8A8790;letter-spacing:.06em;text-transform:uppercase}
+.sk i{display:block;height:1.8rem;border-radius:.6rem;background:#EEECE8}
+.sk i:nth-child(1){width:28%;height:1.1rem}.sk i:nth-child(2){width:62%;height:1.8rem;background:#E3E1DC}.sk i:nth-child(3){width:84%}
+/* badges */
+.badge{position:absolute;left:0;top:0;display:flex;align-items:center;gap:1.2rem;padding:1.2rem 1.8rem 1.2rem 1.2rem;border-radius:1.6rem;background:rgba(251,251,249,.94);border:1px solid rgba(19,17,22,.08);box-shadow:0 2rem 4.4rem -1.8rem rgba(19,17,22,.45);font-size:1.75rem;line-height:1.25;white-space:nowrap;transform-origin:50% 50%}
+.badge b{display:block;font-weight:600}
+.badge small{display:block;color:#65616C;font-size:1.45rem}
+.badge .bi{display:grid;place-items:center;width:3.8rem;height:3.8rem;border-radius:1.1rem;color:#fff;flex:none}
+.badge .bi svg{width:2rem;height:2rem}
+/* labels (S4) */
+#lab{position:absolute;left:0;top:0}
+.lkick{font:500 2.3rem/1 var(--fm);letter-spacing:.16em;text-transform:uppercase;color:var(--mute);display:flex;align-items:center;gap:1.2rem;white-space:nowrap}
+.lkick::before{content:"";width:1.2rem;height:1.2rem;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:linear-gradient(135deg,#FFB21A,#FF5A1F)}
+.lblock{position:absolute;left:0;top:0;font-family:var(--fd);font-weight:800;font-stretch:88%;letter-spacing:-.045em;line-height:.94;white-space:nowrap}
+.segs{display:flex;gap:.9rem}
+.segs i{display:block;width:6.4rem;height:.6rem;border-radius:99px;background:rgba(19,17,22,.12);overflow:hidden}
+.segs b{display:block;height:100%;width:100%;background:var(--juice);transform-origin:0 50%;transform:scaleX(0)}
+#ro{font:500 2.4rem/1 var(--fm);color:var(--ink);letter-spacing:.04em;white-space:nowrap;padding:1rem 1.6rem;border-radius:99px;background:#fff;border:1px solid rgba(19,17,22,.1);box-shadow:0 1rem 2.4rem -1.4rem rgba(19,17,22,.35);font-variant-numeric:tabular-nums}
+/* ---------- S5 devices ---------- */
+#dev{position:absolute;left:0;top:0;transform-style:preserve-3d}
+#lap{position:absolute;left:0;top:0;transform-style:preserve-3d}
+.lscr{position:absolute;left:0;top:0;border-radius:2.2rem;background:#0F0D12;padding:1.4rem;box-shadow:0 0 0 .2rem #2E2A33 inset,0 5rem 10rem -3rem rgba(19,17,22,.55)}
+.lscr .vp{position:relative;width:100%;height:100%;border-radius:.8rem;overflow:hidden;background:#F2F2EF}
+.lscr img,.pscr img{position:absolute;left:0;top:0;width:100%;display:block;will-change:transform}
+.lbase{position:absolute;left:0;top:0;height:2.6rem;border-radius:0 0 2.4rem 2.4rem;background:linear-gradient(180deg,#D9D8D4,#B7B5B0 60%,#8F8D88);box-shadow:0 3rem 5rem -2rem rgba(19,17,22,.55)}
+.lbase::before{content:"";position:absolute;left:50%;top:0;width:16%;height:.9rem;margin-left:-8%;border-radius:0 0 1rem 1rem;background:#A9A7A2}
+#phone{position:absolute;left:0;top:0;border-radius:5.2rem;background:#0F0D12;padding:1.2rem;box-shadow:0 0 0 .25rem #34303A inset,0 5rem 9rem -2.5rem rgba(19,17,22,.6)}
+.pscr{position:relative;width:100%;height:100%;border-radius:4rem;overflow:hidden;background:#F2F2EF}
+.island{position:absolute;left:50%;top:2.2rem;width:9.4rem;height:2.8rem;margin-left:-4.7rem;border-radius:99px;background:#0F0D12;z-index:2}
+.dshadow{position:absolute;left:0;top:0;border-radius:50%;background:radial-gradient(closest-side,rgba(19,17,22,.32),transparent);filter:blur(1.2rem)}
+.rotw{position:relative;display:inline-block;vertical-align:bottom;height:1.1em;overflow:hidden;padding-bottom:.16em;margin-bottom:-.16em}
+.rotw span{position:absolute;left:0;top:0;white-space:nowrap}
+.rotbar{position:absolute;left:0;bottom:.02em;height:.1em;border-radius:99px;background:linear-gradient(100deg,#FFB21A,#FF5A1F);transform-origin:0 50%}
+/* ---------- S6 end card ---------- */
+#ink6{background:#131116}
+#glow6{position:absolute;left:0;top:0;border-radius:50%;background:radial-gradient(closest-side,rgba(255,90,31,.26),rgba(238,42,123,.08) 60%,transparent)}
+#s6 .wm{color:#F3F1F5}
+#tag6{color:#B4B0BB;font-family:var(--fd);font-weight:600;font-stretch:96%;letter-spacing:-.03em;text-align:center}
+#cta6{position:absolute;left:0;top:0;display:inline-flex;align-items:center;gap:1.6rem;padding:2rem 2.2rem 2rem 3.4rem;border-radius:99px;background:var(--orange);color:#131116;font:600 3.8rem/1 var(--fb);white-space:nowrap;transform-origin:50% 50%}
+#cta6 i{display:grid;place-items:center;width:5.4rem;height:5.4rem;border-radius:50%;background:#131116;color:#F3F1F5;font-style:normal;font-size:2.6rem}
+#sub6{font:500 2.1rem/1 var(--fm);letter-spacing:.14em;text-transform:uppercase;color:#7D7986;white-space:nowrap}
+#url6{font:500 3.2rem/1 var(--fm);color:#F3F1F5;letter-spacing:.03em;white-space:nowrap}
+#legal6{font:500 1.7rem/1.2 var(--fm);color:#8D8995;letter-spacing:.03em;white-space:nowrap}
+/* concept: Ardoise */
+.cs-a{background:#F3ECE1;color:#2C2118;font-family:var(--f-body)}
+.c-nav{display:flex;align-items:center;gap:1.4em;padding:1.4em 1.8em;font-size:.85em}
+.c-nav b{font-size:1.25em;margin-right:auto}
+.cs-a .c-nav b,.cs-a .c-h,.cs-a .c-quote{font-family:var(--f-serif);font-weight:400}
+.c-hero{padding:2em 1.8em 1.4em;display:grid;gap:.8em;justify-items:start}
+.c-k{font-size:.7em;letter-spacing:.14em;text-transform:uppercase}
+.c-h{font-size:3.1em;line-height:.98;letter-spacing:-.01em}
+.c-btn{display:inline-block;padding:.7em 1.2em;border-radius:99px;font-size:.8em;font-weight:600}
+.cs-a .c-k{color:#8E5428}.cs-a .c-btn{background:#2C2118;color:#F3ECE1}
+.c-wood{height:24%;margin:0 1.8em;border-radius:.8em;background:repeating-linear-gradient(96deg,#C99566 0 7px,#B98250 7px 10px,#D3A475 10px 17px,#C08A58 17px 21px)}
+.c-row{display:grid;grid-template-columns:repeat(3,1fr);gap:.7em;padding:1em 1.8em}
+.c-row i{display:block;aspect-ratio:1;border-radius:.6em}
+.cs-a .c-row i:nth-child(1){background:repeating-linear-gradient(80deg,#8C5A33 0 5px,#7A4C2A 5px 8px)}
+.cs-a .c-row i:nth-child(2){background:repeating-linear-gradient(100deg,#D9B78F 0 6px,#CBA67B 6px 9px)}
+.cs-a .c-row i:nth-child(3){background:repeating-linear-gradient(90deg,#A8754A 0 4px,#946540 4px 7px)}
+.c-quote{margin:1.2em 1.8em;padding:1.6em;border-radius:.8em;background:#2C2118;color:#F3ECE1;font-size:1.5em;line-height:1.15}
+.c-form{display:grid;gap:.6em;padding:1em 1.8em}
+.c-form i{display:block;height:2.2em;border-radius:.5em;background:#fff;border:1px solid #E2D6C4}
+.c-form i.big{height:5em}
+.c-form .c-btn{justify-self:start}
+.c-foot{margin-top:1.4em;padding:1.6em 1.8em;border-top:1px solid #E2D6C4;font-size:.75em;color:#8C7C69}
+/* concept: Ondine */
+.cs-o{background:#FCE8DF;color:#3B1F2B}
+.cs-o .c-nav b{font-family:var(--f-display);font-weight:900;font-stretch:120%;letter-spacing:-.05em}
+.o-banner{margin:0 1.8em;padding:.6em;border-radius:99px;background:#3B1F2B;color:#FCE8DF;text-align:center;font-size:.7em;letter-spacing:.12em;text-transform:uppercase}
+.o-hero{padding:1.4em 1.8em;display:grid;grid-template-columns:1fr 1fr;gap:1em;align-items:center}
+.o-hero .c-h{font-family:var(--f-display);font-weight:900;font-stretch:115%;font-size:3em;letter-spacing:-.05em;text-transform:uppercase;line-height:.9}
+.o-blob{aspect-ratio:1;border-radius:46% 54% 38% 62%/52% 40% 60% 48%;background:linear-gradient(135deg,#FF8FA3,#FF5A1F)}
+.o-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.9em;padding:1em 1.8em}
+.o-p{display:grid;gap:.4em;font-size:.75em}
+.o-p i{display:block;aspect-ratio:1/1.1;border-radius:.8em}
+.o-p:nth-child(1) i{background:radial-gradient(circle at 50% 60%,#F4B860 0 30%,#F7D9C4 31%)}
+.o-p:nth-child(2) i{background:radial-gradient(ellipse at 50% 55%,#7B3FF2 0 26%,#E9DDF9 27%)}
+.o-p:nth-child(3) i{background:radial-gradient(circle at 50% 50%,#1FA971 0 22%,#D6EEDF 23%)}
+.o-p:nth-child(4) i{background:radial-gradient(ellipse at 50% 60%,#EE2A7B 0 28%,#F9D3E1 29%)}
+.o-p b{display:flex;justify-content:space-between}
+.cs-o .c-btn{background:#3B1F2B;color:#FCE8DF}
+.cs-o .c-foot{border-color:#F2CFC0;color:#A0707F}
+/* concept: Vallès */
+.cs-v{background:#12203B;color:#EDE6D6}
+.cs-v .c-nav b,.cs-v .c-h{font-family:var(--f-serif);font-weight:400}
+.cs-v .c-k{color:#C9A15B}
+.cs-v .c-btn{background:#C9A15B;color:#12203B}
+.v-dom{display:grid;gap:0;padding:1em 1.8em}
+.v-dom span{display:flex;justify-content:space-between;padding:.9em 0;border-bottom:1px solid rgba(237,230,214,.15);font-size:.9em}
+.v-dom span::after{content:"→";color:#C9A15B}
+.v-rdv{margin:1em 1.8em;padding:1.2em;border-radius:.8em;background:#EDE6D6;color:#12203B;display:grid;gap:.7em}
+.v-rdv b{font-family:var(--f-serif);font-weight:400;font-size:1.4em}
+.v-slots{display:grid;grid-template-columns:repeat(3,1fr);gap:.5em;font-family:var(--f-mono);font-size:.75em}
+.v-slots span{padding:.6em;border:1px solid #C9B98F;border-radius:.4em;text-align:center}
+.v-slots span:nth-child(2){background:#12203B;color:#EDE6D6;border-color:#12203B}
+.cs-v .c-foot{border-color:rgba(237,230,214,.15);color:#8D96AB}
+/* concept: Comptoir */
+.cs-c{background:#1E3A2F;color:#F2E9D8}
+.cs-c .c-nav b{font-family:var(--f-display);font-weight:800;font-stretch:80%;text-transform:uppercase;letter-spacing:.02em}
+.cs-c .c-h{font-family:var(--f-display);font-weight:800;font-stretch:78%;text-transform:uppercase;letter-spacing:-.01em;font-size:3.6em;line-height:.9}
+.cs-c .c-h em{font-style:normal;color:#FF8A3D}
+.cs-c .c-btn{background:#FF8A3D;color:#1E3A2F}
+.c-photo{height:22%;margin:0 1.8em;border-radius:.8em;background:radial-gradient(circle at 30% 50%,#E8B04A 0 14%,transparent 15%),radial-gradient(circle at 62% 46%,#C2452D 0 18%,transparent 19%),radial-gradient(circle at 80% 62%,#8DB255 0 10%,transparent 11%),#2C4A3D}
+.menu-l{padding:1.2em 1.8em;display:grid;gap:.1em}
+.menu-l p{font-family:var(--f-serif);font-style:italic;font-size:1.3em;color:#FF8A3D;margin-bottom:.4em}
+.menu-l span{display:flex;gap:.6em;padding:.55em 0;font-size:.85em;border-bottom:1px dotted rgba(242,233,216,.25)}
+.menu-l span b{margin-left:auto;font-family:var(--f-mono);font-weight:500}
+.cs-c .c-foot{border-color:rgba(242,233,216,.15);color:#9CB0A6}
+
+
+:root{--f-display:var(--fd);--f-body:var(--fb);--f-mono:var(--fm);--f-serif:var(--fs)}
+.cp{background:#F2F2EF}
+.cp .cs{position:absolute;left:0;right:0;top:0;min-height:100%;font-size:2.9cqw}
+#chips7{display:none;margin-top:3rem}
+.cr7{display:flex;flex-wrap:wrap;gap:1rem}
+.cr7 span{padding:.9rem 1.8rem;border-radius:99px;border:1px solid rgba(19,17,22,.16);font:500 2.1rem/1 var(--fm);color:#65616C;background:rgba(251,251,249,.75)}
+.cr7 span.on{background:#131116;color:#F3F1F5;border-color:#131116}
+#cn7{font:500 2rem/1.2 var(--fm);color:#6A6672;letter-spacing:.05em;white-space:nowrap}
+/* S8 méthode */
+#s8{background:#131116;color:#F3F1F5}
+.gl8{position:absolute;inset:0;background:radial-gradient(55% 60% at 82% 18%,rgba(255,90,31,.2),transparent 70%),radial-gradient(50% 50% at 8% 92%,rgba(123,63,242,.18),transparent 70%)}
+.lkick.dk{color:#A29EAA}
+#s8h{color:#F3F1F5}
+.st8{position:absolute;left:0;top:0;display:flex;align-items:center;gap:2.4rem;white-space:nowrap}
+.nd8{display:grid;place-items:center;width:6.4rem;height:6.4rem;border-radius:50%;font:500 2.2rem/1 var(--fm);border:.28rem solid #3A3542;color:#A29EAA;background:#131116;flex:none;position:relative;z-index:2}
+.st8.on .nd8{background:linear-gradient(135deg,#FFB21A,#FF5A1F 55%,#EE2A7B);border-color:transparent;color:#131116}
+.tx8 b{display:block;font:800 6.2rem/1 var(--fd);letter-spacing:-.045em;font-stretch:94%;color:#F3F1F5}
+.port .nd8{width:7.6rem;height:7.6rem;font-size:2.6rem}
+.port .tx8 b{font-size:7.2rem}
+.port .tx8 small{font-size:2.4rem}
+.tx8 small{display:block;margin-top:.7rem;font:500 2.1rem/1.2 var(--fm);color:#A29EAA;letter-spacing:.02em}
+.tube8{position:absolute;left:0;top:0;width:1.2rem;border-radius:99px;background:#2B2731;overflow:hidden;z-index:1}
+.tube8 span{position:absolute;inset:0;background:linear-gradient(180deg,#FFB21A,#FF5A1F 40%,#EE2A7B 75%,#7B3FF2);transform-origin:50% 0;transform:scaleY(0);border-radius:inherit}
+#s8ok{position:absolute;left:0;top:0;display:flex;align-items:center;gap:1.2rem;padding:1.5rem 2.4rem 1.5rem 1.8rem;border-radius:99px;background:#1FA971;color:#fff;font:600 2.8rem/1 var(--fb);white-space:nowrap;transform-origin:0 50%}
+#s8ok svg{width:3rem;height:3rem}
+/* S9 offres */
+@property --ang{syntax:"<angle>";initial-value:0deg;inherits:true}
+.pl9{position:absolute;left:0;top:0;display:flex;flex-direction:column;gap:1.8rem;padding:3.4rem 3.2rem;border-radius:3rem;background:#FBFBF9;border:1px solid rgba(19,17,22,.1);box-shadow:0 .2rem .4rem rgba(19,17,22,.05),0 3rem 6rem -2rem rgba(19,17,22,.28);color:#131116}
+.pl9.feat{background:#1C1A21;color:#F3F1F5;border-color:transparent;isolation:isolate}
+.pl9.feat::before{content:"";position:absolute;inset:-.35rem;border-radius:3.35rem;padding:.35rem;background:conic-gradient(from var(--ang),#FFB21A,#FF5A1F,#EE2A7B,#7B3FF2,#FFB21A);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;z-index:-1}
+.hd9{display:grid;gap:1rem}
+.pk9{font:500 2rem/1 var(--fm);letter-spacing:.12em;text-transform:uppercase;color:#65616C}
+.pl9.feat .pk9{color:#A29EAA}
+.pt9{font:800 6.4rem/1 var(--fd);letter-spacing:-.045em;font-stretch:94%}
+.pp9{font:700 3.2rem/1 var(--fd);letter-spacing:-.03em;background:linear-gradient(100deg,#FFB21A,#FF5A1F 50%,#EE2A7B);-webkit-background-clip:text;background-clip:text;color:transparent;width:max-content}
+.pl9 ul{list-style:none;margin:0;padding:0;display:grid;gap:1.1rem;font:500 2.5rem/1.25 var(--fb)}
+.pl9 li{display:flex;gap:1rem}
+.pl9 li::before{content:"✓";color:#FF5A1F;font-weight:700;flex:none}
+.rc9{position:absolute;right:2.6rem;top:-1.5rem;padding:.8rem 1.6rem;border-radius:99px;background:linear-gradient(100deg,#FFB21A,#FF5A1F);color:#131116;font:600 1.8rem/1 var(--fm);letter-spacing:.06em;text-transform:uppercase}
+.pl9.p{flex-direction:row;align-items:center;gap:2.4rem;padding:2.4rem 3rem}
+.pl9.p .hd9{flex:none;width:40%}
+.pl9.p .pt9{font-size:5.4rem}
+.pl9.p ul{flex:1;font-size:2.2rem;gap:.8rem}
+#s9note{position:absolute;left:0;top:0;display:flex;align-items:center;gap:1.4rem;padding:1.1rem 2.6rem 1.1rem 1.1rem;border-radius:99px;background:rgba(251,251,249,.94);box-shadow:0 1.6rem 3.6rem -1.6rem rgba(19,17,22,.35);font:600 3.2rem/1 var(--fb);color:#131116;white-space:nowrap}
+#s9note i{display:grid;place-items:center;width:4.4rem;height:4.4rem;border-radius:50%;background:#1FA971;color:#fff;font-style:normal;font-size:2.4rem}
+
+/* ---------- finishing ---------- */
+#vig{position:absolute;inset:0;pointer-events:none;background:radial-gradient(120% 90% at 50% 45%,transparent 55%,rgba(19,17,22,.16))}
+#grain{position:absolute;left:-50%;top:-50%;width:200%;height:200%;pointer-events:none;opacity:.055}
+</style></head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <linearGradient id="jg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFB21A"/><stop offset=".45" stop-color="#FF5A1F"/><stop offset="1" stop-color="#EE2A7B"/></linearGradient>
+  <linearGradient id="gg" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#FFB21A"/><stop offset=".55" stop-color="#FF5A1F"/><stop offset="1" stop-color="#EE2A7B"/></linearGradient>
+  <symbol id="drop" viewBox="0 0 32 32"><path fill="url(#jg)" d="M16 2.5S6.5 12.6 6.5 19.4a9.5 9.5 0 0 0 19 0C25.5 12.6 16 2.5 16 2.5Z"/><path fill="#fff" fill-opacity=".8" d="M11.2 19.6c.2-2.6 1.6-5 3.1-6.8.4-.5-.2-1-.7-.7-2 1.8-3.6 4.5-3.8 7.3-.1 1 1.3 1.2 1.4.2Z"/></symbol>
+  <symbol id="dropInk" viewBox="0 0 32 32"><path fill="#131116" d="M16 2.5S6.5 12.6 6.5 19.4a9.5 9.5 0 0 0 19 0C25.5 12.6 16 2.5 16 2.5Z"/><path fill="#F2F2EF" fill-opacity=".85" d="M11.2 19.6c.2-2.6 1.6-5 3.1-6.8.4-.5-.2-1-.7-.7-2 1.8-3.6 4.5-3.8 7.3-.1 1 1.3 1.2 1.4.2Z"/></symbol>
+  <symbol id="lock" viewBox="0 0 16 16"><rect x="3" y="7" width="10" height="7" rx="2" fill="currentColor"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+  <symbol id="chk" viewBox="0 0 20 20"><path d="M5 10.5l3.2 3.2L15 6.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</defs></svg>
+
+<div id="stage">
+  <div id="bg" class="layer" style="background:#F2F2EF"></div>
+
+  <!-- S3/S4: frame, caption, badges, labels -->
+  <div id="s34" class="layer" style="z-index:3;perspective:2400px">
+    <div id="cap3" class="kt"></div>
+    <div id="lab">
+      <div class="lkick" id="labk">01 — Design</div>
+      <div id="labs"></div>
+      <div class="segs" id="segs"><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i></div>
+      <div id="chips7"><div class="cr7"><span>Menuiserie</span><span>Boutique</span><span>Cabinet</span><span>Restaurant</span></div></div>
+    </div>
+    <div id="fr">
+      <div class="fbar"><i></i><i></i><i></i><div class="url" id="url"><svg><use href="#lock"/></svg><span id="urlt">votre-site.fr</span></div></div>
+      <div class="fbody" id="fbody">
+        <div class="pn" id="pn0"><img src="shots/desk_hero.jpg" alt=""></div>
+        <div class="pn" id="pn1" data-s="elegant"><div class="ms">
+          <div class="ms-nav"><b class="ms-logo">Ardoise</b><span class="ms-links"><span>Atelier</span><span>Projets</span><span>Contact</span></span><span class="ms-btn">Devis</span></div>
+          <div class="ms-hero"><div class="ms-text"><span class="ms-kicker">Menuiserie sur mesure</span><b class="ms-title">Le bois, travaillé à la main.</b><span class="ms-cta">Demander un devis →</span></div><div class="ms-img"></div></div>
+          <div class="ms-cards"><span><i></i>Cuisines</span><span><i></i>Escaliers</span><span><i></i>Dressings</span></div>
+        </div></div>
+        <div class="pn" id="pn2"><div class="rs">
+          <div class="rs-nav"><b class="rs-logo">Rivière</b><span class="rs-links"><span>Chambres</span><span>Tarifs</span><span>Accès</span></span><span class="rs-cta">Réserver</span><span class="rs-burger"></span></div>
+          <div class="rs-hero"><div><div class="rs-title">Des chambres au calme, face à la rivière.</div><p class="rs-p">Maison d’hôtes · 4 chambres · jardin</p><span class="rs-btn">Voir les disponibilités</span></div><div class="rs-img"></div></div>
+          <div class="rs-cards"><span>Petit-déjeuner</span><span>Jardin</span><span>Parking</span></div>
+        </div></div>
+        <div class="pn" id="pn3"><div class="gz">
+          <div class="gwrap"><svg class="gsvg" viewBox="0 0 240 132"><path class="gbg" d="M20 120 A100 100 0 0 1 220 120"/><path class="gfg" id="gfg" d="M20 120 A100 100 0 0 1 220 120" pathLength="100" stroke-dasharray="100" stroke-dashoffset="100"/></svg><div class="gnum"><b id="gnum">0</b></div></div>
+          <div class="glab">Score visé : 90+ · exemple illustratif</div>
+          <div class="gmet"><div><span>Chargement</span><i><em id="gm1"></em></i></div><div><span>Stabilité</span><i><em id="gm2"></em></i></div><div><span>Accessibilité</span><i><em id="gm3"></em></i></div></div>
+        </div></div>
+        <div class="pn" id="pn4"><div class="lz">
+          <div class="lkw"><div class="lring" id="lring"></div>
+            <svg class="lk" viewBox="0 -14 64 90"><path id="shk" d="M16 34V22a16 16 0 0 1 32 0v12" fill="none" stroke="#2B2731" stroke-width="6.5" stroke-linecap="round"/><rect id="lbody" x="6" y="32" width="52" height="40" rx="11" fill="#2B2731"/><circle cx="32" cy="50" r="5" fill="#F2F2EF"/><rect x="30" y="52" width="4" height="9" rx="2" fill="#F2F2EF"/></svg></div>
+          <div class="lpill" id="lpill"><svg><use href="#lock"/></svg><span>https://votre-site.fr</span></div>
+          <div class="lcard" id="lcard"><i><svg width="20" height="20"><use href="#chk"/></svg></i><span><b>Connexion chiffrée</b><small>Certificat HTTPS actif</small></span></div>
+        </div></div>
+        <div class="pn" id="pn5"><div class="sz">
+          <div class="sbar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg><span class="qw"><span id="sq"></span><i class="caret" id="caret"></i></span></div>
+          <div class="sres" id="sr1"><span class="u">ardoise-menuiserie.fr</span><b>Atelier Ardoise · Menuiserie sur mesure</b><span class="d">Cuisines, escaliers et dressings fabriqués à la main. Devis détaillé.</span></div>
+          <div class="sres" id="sr2"><div class="fchips"><span>Structure</span><span>Balises</span><span>Vitesse</span><span>Plan du site</span></div><span class="d">Les fondations techniques sont incluses dans chaque site.</span></div>
+          <p class="snote" id="sr3">Illustration · aucun classement garanti</p>
+        </div></div>
+        <div class="pn cp" id="pn6"><div class="cs cs-a" aria-hidden="true">
+            <div class="c-nav"><b>Ardoise</b><span>Atelier</span><span>Projets</span><span>Devis</span></div>
+            <div class="c-hero"><span class="c-k">Menuiserie sur mesure</span><span class="c-h">Le bois, travaillé à la main.</span><span class="c-btn">Demander un devis</span></div>
+            <div class="c-wood"></div>
+            <div class="c-row"><i></i><i></i><i></i></div>
+            <div class="c-quote">« Chaque pièce est dessinée pour la maison qui l'accueille. »</div>
+            <div class="c-form"><i></i><i></i><i class="big"></i><span class="c-btn">Envoyer ma demande</span></div>
+            <div class="c-foot">Atelier Ardoise · Menuiserie et agencement</div>
+          </div></div>
+        <div class="pn cp" id="pn7"><div class="cs cs-o" aria-hidden="true">
+            <div class="c-nav"><b>ondine</b><span>Boutique</span><span>Univers</span><span>Panier (2)</span></div>
+            <div class="o-banner">Nouvelle collection · pièces uniques</div>
+            <div class="o-hero"><span class="c-h">Fait main, fait pour durer</span><div class="o-blob"></div></div>
+            <div class="o-grid">
+              <div class="o-p"><i></i><b><span>Vase Sable</span><span>48 €</span></b></div>
+              <div class="o-p"><i></i><b><span>Bol Iris</span><span>32 €</span></b></div>
+              <div class="o-p"><i></i><b><span>Tasse Fougère</span><span>24 €</span></b></div>
+              <div class="o-p"><i></i><b><span>Coupe Pivoine</span><span>56 €</span></b></div>
+            </div>
+            <div class="c-hero"><span class="c-btn">Voir toute la boutique</span></div>
+            <div class="c-foot">Maison Ondine · Céramiques de créatrice</div>
+          </div></div>
+        <div class="pn cp" id="pn8"><div class="cs cs-v" aria-hidden="true">
+            <div class="c-nav"><b>Vallès &amp; Associés</b><span>Expertises</span><span>Cabinet</span></div>
+            <div class="c-hero"><span class="c-k">Cabinet d'avocats</span><span class="c-h">Défendre vos intérêts, avec clarté.</span><span class="c-btn">Prendre rendez-vous</span></div>
+            <div class="v-dom"><span>Droit des affaires</span><span>Droit du travail</span><span>Droit immobilier</span><span>Médiation</span></div>
+            <div class="v-rdv"><b>Premier rendez-vous</b><div class="v-slots"><span>Lun 09:30</span><span>Mar 14:00</span><span>Jeu 11:00</span></div></div>
+            <div class="c-foot">Vallès &amp; Associés · Avocats au barreau</div>
+          </div></div>
+        <div class="pn cp" id="pn9"><div class="cs cs-c" aria-hidden="true">
+            <div class="c-nav"><b>Comptoir Sauvage</b><span>Carte</span><span>Réserver</span></div>
+            <div class="c-hero"><span class="c-h">Cuisine de <em>saison</em>, vins vivants.</span><span class="c-btn">Réserver une table</span></div>
+            <div class="c-photo"></div>
+            <div class="menu-l"><p>La carte du moment</p><span>Burrata, tomates anciennes<b>14</b></span><span>Lieu jaune, beurre blanc<b>26</b></span><span>Pigeon rôti, betteraves<b>29</b></span><span>Tarte fine aux figues<b>11</b></span></div>
+            <div class="c-foot">Le Comptoir Sauvage · Bistrot de quartier</div>
+          </div></div>
+        <div class="wipe" id="wipe"></div>
+      </div>
+    </div>
+    <div class="badge" id="bd1"><span class="bi" style="background:#1FA971"><svg><use href="#chk"/></svg></span><span><b>Formulaire reçu</b><small>Nouvelle demande de devis</small></span></div>
+    <div class="badge" id="bd2"><span class="bi" style="background:#131116"><svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="4.2" fill="#1FA971"/></svg></span><span><b>Site en ligne</b><small>votre-site.fr</small></span></div>
+    <div class="badge" id="bd3"><span class="bi" style="background:#7B3FF2"><svg><use href="#lock"/></svg></span><span><b>Paiement sécurisé</b><small>Transaction validée</small></span></div>
+    <div id="ro" class="abs">1440 px</div>
+    <div id="cn7" class="abs" style="visibility:hidden">Concepts de démonstration · aucun client réel</div>
+  </div>
+
+  <!-- S5: devices + headline -->
+  <div id="s5" class="layer" style="z-index:3;perspective:2600px">
+    <div id="h5" class="kt">
+      <div class="ln"><span>Votre <span class="rotw" id="rotw"><span>commerce</span><span>atelier</span><span>cabinet</span><span>restaurant</span><i class="rotbar" id="rotbar"></i></span></span></div>
+      <div class="ln"><span>mérite un site</span></div>
+      <div class="ln"><span>qui a du <b class="grad" id="jus5" style="display:inline-block;transform-origin:50% 90%;font-weight:inherit">jus</b>.</span></div>
+    </div>
+    <div class="dshadow" id="dsh"></div>
+    <div id="dev">
+      <div id="lap"><div class="lscr" id="lscr"><div class="vp"><img id="limg" src="shots/desk_long2.jpg" alt=""></div></div><div class="lbase" id="lbase"></div></div>
+      <div id="phone"><div class="pscr"><img id="pimg" src="shots/mob_long.jpg" alt=""><i class="island"></i></div></div>
+    </div>
+  </div>
+
+  <!-- S8 méthode -->
+  <div id="s8" class="layer" style="z-index:3;visibility:hidden">
+    <div class="gl8"></div>
+    <div id="s8k" class="lkick dk" style="position:absolute;left:0;top:0">07 — Méthode</div>
+    <div id="s8h" class="kt"><div class="ln"><span>De l’idée à la</span></div><div class="ln"><span><b class="grad" style="font-weight:inherit">mise en ligne.</b></span></div></div>
+    <div id="s8ok"><svg viewBox="0 0 20 20"><use href="#chk"/></svg>Site en ligne</div>
+  </div>
+  <!-- S9 offres -->
+  <div id="s9" class="layer" style="z-index:3;visibility:hidden">
+    <div id="s9k" class="lkick" style="position:absolute;left:0;top:0">08 — Offres</div>
+    <div id="s9h" class="kt"><div class="ln"><span>Des offres <b class="grad" style="font-weight:inherit">claires.</b></span></div></div>
+    <div class="pl9" id="pl1"><div class="hd9"><span class="pk9">Site vitrine</span><b class="pt9">Essentielle</b><span class="pp9">Sur devis</span></div><ul><li>Design moderne et professionnel</li><li>Responsive, du mobile à l’ordinateur</li><li>Formulaire de contact, bases SEO</li></ul></div>
+    <div class="pl9 feat" id="pl2"><span class="rc9">Recommandée</span><div class="hd9"><span class="pk9">Site vitrine</span><b class="pt9">Premium</b><span class="pp9">Sur devis</span></div><ul><li>Animations et micro-interactions</li><li>Vitesse optimisée, SEO renforcé</li><li>Accompagnement après livraison</li></ul></div>
+    <div class="pl9" id="pl3"><div class="hd9"><span class="pk9">Projet spécifique</span><b class="pt9">Sur mesure</b><span class="pp9">Sur devis</span></div><ul><li>Conçu pour votre besoin</li><li>E-commerce, réservation, espace client</li><li>Chiffrage détaillé, poste par poste</li></ul></div>
+    <div id="s9note"><i>✓</i>Devis détaillé avant tout paiement.</div>
+  </div>
+
+  <!-- S1: hook -->
+  <div id="s1" class="layer" style="z-index:4">
+    <div id="t1" class="kt">
+      <div class="ln"><span>Votre site</span></div>
+      <div class="ln"><span>manque de</span></div>
+      <div class="ln"><span id="jus1" style="position:relative">jus&#8239;?<i id="sadrop"></i></span></div>
+    </div>
+    <div id="old">
+      <div class="ob"><i></i><i></i><i></i><span>http://www.mon-site-perso.example/accueil.htm</span></div>
+      <div class="o-top">~ Bienvenue sur notre site !!! ~</div>
+      <div class="o-body">
+        <div class="o-nav"><a>Accueil</a><a>Nos services</a><a>Tarifs 2011</a><a>Livre d'or</a><a>Contact</a></div>
+        <div class="o-main"><b class="t">Mon Entreprise</b><span>Site en construction. Cliquez <a>ICI</a> pour voir les photos (chargement long).</span><div class="o-stripe">EN CONSTRUCTION</div><div class="o-row"><span class="o-btn">Envoyer</span><span class="o-count">Visiteurs : <b id="cnt">001337</b></span></div></div>
+      </div>
+    </div>
+  </div>
+  <div id="plates" class="layer" style="z-index:6">
+    <div class="plate" id="pt"><span class="bolt" style="left:8%"></span><span class="bolt" style="left:30%"></span><span class="eng">juicecraft · presse à jus</span></div>
+    <div class="plate" id="pb"><span class="bolt" style="left:8%"></span><span class="bolt" style="left:30%"></span><span class="eng">pression 100&#8239;%</span></div>
+  </div>
+
+  <canvas class="liq" id="liqB" style="z-index:2"></canvas>
+  <canvas class="liq" id="liqF" style="z-index:5"></canvas>
+
+  <div id="w3" style="z-index:9"><svg id="w3d"><use href="#dropInk"/></svg><div class="wm" id="w3w"></div></div>
+
+  <div id="ink6" class="layer" style="z-index:11"></div>
+  <div id="s6" class="layer" style="z-index:13">
+    <div id="glow6"></div>
+    <div id="lock6" class="abs" style="display:flex;align-items:center"><svg id="d6"><use href="#drop"/></svg><div class="wm" id="wm6"></div></div>
+    <div id="tag6" class="kt"><div class="ln"><span>Des sites qui ont du <b class="grad" style="font-weight:inherit">jus</b>.</span></div></div>
+    <div id="cta6"><span>Demander un devis</span><i>→</i></div>
+    <div id="sub6" class="abs">Sites vitrines · E-commerce · Sur mesure</div>
+    <div id="url6" class="abs"></div>
+    <div id="legal6" class="abs">Démonstrations et exemples fictifs, à titre d’illustration.</div>
+  </div>
+
+  <div id="flash" style="z-index:8;opacity:0"></div>
+  <div id="vig" style="z-index:29"></div>
+  <div id="grain" style="z-index:30"></div>
+</div>
+
+<script>
+"use strict";
+const Q = new URLSearchParams(location.search);
+const W = +(Q.get("w") || 1920), H = +(Q.get("h") || 1080);
+const LAND = W / H > 1.2;
+if (W / H <= 1.2) document.body.classList.add("port");
+const U = Math.min(W, H) / 1080;
+const URLTXT = Q.get("url") || "";
+document.documentElement.style.fontSize = (10 * U) + "px";
+const $ = id => document.getElementById(id);
+const stage = $("stage"); stage.style.width = W + "px"; stage.style.height = H + "px";
+
+/* ---------- math ---------- */
+const cl = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const P = (t, a, b) => cl((t - a) / (b - a));
+const lerp = (a, b, k) => a + (b - a) * k;
+const E = {
+  lin: x => x,
+  outExpo: x => x >= 1 ? 1 : 1 - Math.pow(2, -10 * x),
+  inExpo: x => x <= 0 ? 0 : Math.pow(2, 10 * x - 10),
+  inOutExpo: x => x <= 0 ? 0 : x >= 1 ? 1 : x < .5 ? Math.pow(2, 20 * x - 10) / 2 : (2 - Math.pow(2, -20 * x + 10)) / 2,
+  outCubic: x => 1 - Math.pow(1 - x, 3), inCubic: x => x * x * x,
+  inOutCubic: x => x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2,
+  outQuart: x => 1 - Math.pow(1 - x, 4), inQuad: x => x * x,
+  inOutSine: x => -(Math.cos(Math.PI * x) - 1) / 2,
+  outBack: (x, s = 1.70158) => { const c = s + 1; return 1 + c * Math.pow(x - 1, 3) + s * Math.pow(x - 1, 2); },
+};
+const rng = seed => () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
+const vis = (el, on) => { el.style.visibility = on ? "inherit" : "hidden"; };
+const shake = (t, t0, amp, dec = 9) => { if (t < t0) return [0, 0]; const d = t - t0, a = amp * Math.exp(-dec * d); return [a * Math.sin(d * 2 * Math.PI * 17), a * .7 * Math.cos(d * 2 * Math.PI * 13)]; };
+
+/* ---------- layout ---------- */
+const G = LAND ? {
+  t1: { x: 140 * U, cy: H * .5, fs: 182 * U },
+  card: { cx: W * .74, cy: H * .53, w: 720 * U },
+  fr3: { cx: W / 2, cy: H * .565, w: 1150 * U },
+  cap3: { fs: 70 * U, y: H * .095, lines: ["Studio de création de sites internet."] },
+  fr4: { cx: W * .705, cy: H * .5, w: 930 * U, h: 620 * U },
+  lab: { x: 140 * U, cy: H * .5, fs: 112 * U },
+  wm3: 205 * U, d3: 170 * U,
+  dev: { cx: W * .67, cy: H * .515, scr: 880 * U, ph: 245 * U },
+  h5: { x: 140 * U, cy: H * .5, fs: 92 * U },
+  s6: { cy: H * .39, wm: 215 * U, d: 182 * U, tag: 64 * U },
+} : {
+  t1: { x: 80 * U, top: H * .11, fs: 168 * U },
+  card: { cx: W / 2, cy: H * .655, w: 920 * U },
+  fr3: { cx: W / 2, cy: H * .57, w: 990 * U },
+  cap3: { fs: 92 * U, y: H * .17, lines: ["Studio de création", "de sites internet."] },
+  fr4: { cx: W / 2, cy: H * .53, w: 940 * U, h: 760 * U },
+  lab: { x: 90 * U, top: H * .1, fs: 128 * U },
+  wm3: 150 * U, d3: 128 * U,
+  dev: { cx: W * .45, cy: H * .55, scr: 780 * U, ph: 240 * U },
+  h5: { x: 90 * U, top: H * .14, fs: 112 * U },
+  s6: { cy: H * .42, wm: 150 * U, d: 128 * U, tag: 58 * U },
+};
+
+/* ---------- build text ---------- */
+const lines = (el, arr) => { el.innerHTML = arr.map(s => `<div class="ln"><span>${s}</span></div>`).join(""); return [...el.querySelectorAll(".ln>span")]; };
+const t1 = $("t1"); t1.style.fontSize = G.t1.fs + "px";
+const t1L = [...t1.querySelectorAll(".ln>span")];
+const cap3 = $("cap3"); cap3.style.fontSize = G.cap3.fs + "px"; cap3.style.fontStretch = "95%";
+const cap3L = lines(cap3, G.cap3.lines);
+const LABELS = [["À votre", "<span class='grad'>image.</span>"], ["Sur tous", "les <span class='grad'>écrans.</span>"], ["<span class='grad'>Rapide.</span>"], ["<span class='grad'>Sécurisé.</span>"], ["<span class='grad'>Visible.</span>"], ["Pour chaque", "<span class='grad'>métier.</span>"]];
+const KICK = ["01 — Identité", "02 — Mobile", "03 — Performance", "04 — Sécurité", "05 — Référencement", "06 — Réalisations"];
+const labs = $("labs");
+const labBlocks = LABELS.map(L => { const d = document.createElement("div"); d.className = "lblock"; d.style.fontSize = G.lab.fs + "px"; labs.appendChild(d); return lines(d, L); });
+const labEls = [...labs.children];
+const segB = [...document.querySelectorAll("#segs b")];
+const w3w = $("w3w"); w3w.style.fontSize = G.wm3 + "px";
+w3w.innerHTML = [..."juicecraft"].map(c => `<span>${c}</span>`).join("");
+const w3L = [...w3w.children];
+const w3d = $("w3d"); w3d.style.width = w3d.style.height = G.d3 + "px";
+const wm6 = $("wm6"); wm6.style.fontSize = G.s6.wm + "px";
+wm6.innerHTML = [..."juicecraft"].map(c => `<span>${c}</span>`).join("");
+const wm6L = [...wm6.children];
+const d6 = $("d6"); d6.style.width = d6.style.height = G.s6.d + "px"; d6.style.marginRight = (G.s6.d * .12) + "px";
+const tag6 = $("tag6"); tag6.style.fontSize = G.s6.tag + "px"; const tag6L = [...tag6.querySelectorAll(".ln>span")];
+const h5 = $("h5"); h5.style.fontSize = G.h5.fs + "px"; h5.style.fontStretch = "88%";
+const h5L = [...h5.querySelectorAll(":scope>.ln>span")];
+const rotWords = [...$("rotw").querySelectorAll(":scope>span")];
+if (URLTXT) $("url6").textContent = URLTXT;
+
+/* ---------- static geometry (measured once fonts are ready) ---------- */
+const M = {};
+const oldEl = $("old"), fr = $("fr");
+function measure() {
+  // card
+  const cw = G.card.w;
+  oldEl.style.width = cw + "px"; oldEl.style.height = "auto";
+  oldEl.style.fontSize = (10 * U * cw / (760 * U)) + "px";
+  const ch = oldEl.offsetHeight; M.card = { w: cw, h: ch }; oldEl.style.height = ch + "px";
+  // S1 text
+  M.t1h = t1.getBoundingClientRect().height;
+  // caption
+  M.cap3 = { w: cap3.offsetWidth, h: cap3.offsetHeight };
+  // labels
+  M.lab = labEls.map(e => ({ w: e.offsetWidth, h: e.offsetHeight }));
+  M.labk = $("labk").offsetHeight;
+  // rot words
+  M.rot = rotWords.map(s => s.offsetWidth);
+  $("rotw").style.width = Math.max(...M.rot) + "px";
+  M.h5 = { w: h5.offsetWidth, h: h5.offsetHeight };
+  // S6 lockup
+  const lk = $("lock6"); lk.style.transform = "none";
+  M.lock = { w: lk.offsetWidth, h: lk.offsetHeight };
+  M.tag6 = { w: tag6.offsetWidth, h: tag6.offsetHeight };
+  const cta = $("cta6"); M.cta = { w: cta.offsetWidth, h: cta.offsetHeight };
+  M.sub = { w: $("sub6").offsetWidth, h: $("sub6").offsetHeight };
+  M.url = { w: $("url6").offsetWidth, h: $("url6").offsetHeight };
+  M.legal = { w: $("legal6").offsetWidth, h: $("legal6").offsetHeight };
+  M.lockShift = .11 * G.s6.d;
+  const stackH = M.lock.h + 34 * U + M.tag6.h + 54 * U + M.cta.h + 44 * U + (URLTXT ? M.url.h : M.sub.h) + 26 * U + M.legal.h;
+  G.s6.cy = (H - stackH) * .45 + M.lock.h / 2;
+  M.d6x = (W - M.lock.w) / 2 - M.lockShift + G.s6.d / 2; M.d6y = G.s6.cy;
+  const sd = $("sadrop"); t1.appendChild(sd);
+  const jr = $("jus1").getBoundingClientRect(), tr = t1.getBoundingClientRect();
+  M.sad = { x: jr.left - tr.left + jr.width * .16, y: jr.top - tr.top + jr.height * .72 };
+  M.ro = { w: $("ro").offsetWidth, h: $("ro").offsetHeight };
+  M.badges = ["bd1", "bd2", "bd3"].map(id => ({ w: $(id).offsetWidth, h: $(id).offsetHeight }));
+  // devices
+  const scr = G.dev.scr, sh = scr * .625, pad = 14 * U;
+  M.lap = { w: scr + pad * 2, h: sh + pad * 2 };
+  const ls = $("lscr"); ls.style.width = M.lap.w + "px"; ls.style.height = M.lap.h + "px";
+  const lb = $("lbase"); lb.style.width = (M.lap.w * 1.16) + "px"; lb.style.transform = `translate(${-M.lap.w * .08}px,${M.lap.h}px)`;
+  const pw = G.dev.ph, ph = pw * 2.16, pp = 12 * U;
+  M.ph = { w: pw + pp * 2, h: ph + pp * 2 };
+  const pe = $("phone"); pe.style.width = M.ph.w + "px"; pe.style.height = M.ph.h + "px";
+  M.limgScale = scr / 2160; M.pimgScale = pw / 780;
+}
+
+/* ---------- liquid (WebGL metaballs) ---------- */
+const N = 40;
+const HEX = h => [parseInt(h.slice(1, 3), 16) / 255, parseInt(h.slice(3, 5), 16) / 255, parseInt(h.slice(5, 7), 16) / 255];
+const C = { mango: HEX("#FFB21A"), orange: HEX("#FF5A1F"), berry: HEX("#EE2A7B"), grape: HEX("#7B3FF2"), peach: HEX("#FF7A2E"), pink: HEX("#F0437F"), gold: HEX("#FFC94A") };
+function makeLiquid(canvas) {
+  canvas.width = W; canvas.height = H;
+  const gl = canvas.getContext("webgl", { premultipliedAlpha: true, alpha: true, antialias: false, preserveDrawingBuffer: true });
+  const vs = "attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}";
+  const fs = `precision highp float;
+  #define N ${N}
+  uniform vec3 uB[N]; uniform vec3 uC[N]; uniform vec2 uRes; uniform float uT; uniform float uK; uniform int uN;
+  void main(){
+    vec2 p=gl_FragCoord.xy; float f=0.; vec3 col=vec3(0.); float ws=0.; vec2 g=vec2(0.);
+    for(int i=0;i<N;i++){ if(i>=uN) break; vec3 b=uB[i]; if(b.z<.5) continue;
+      vec2 d=p-b.xy; float r2=b.z*b.z; float dd=dot(d,d)+1.; float v=r2/dd; f+=v; float w=pow(v,1.5); col+=uC[i]*w; ws+=w; g+=-2.*r2*d/(dd*dd); }
+    if(f<.2){ gl_FragColor=vec4(0.); return; }
+    col/=max(ws,1e-6);
+    vec2 uv=p/uRes; float dg=uv.x*.75+(1.-uv.y)*.45;
+    vec3 grad=mix(mix(vec3(1.,.70,.10),vec3(1.,.353,.12),smoothstep(.05,.6,dg)),vec3(.93,.165,.48),smoothstep(.6,1.2,dg));
+    col=mix(col,grad,.22);
+    float gm=length(g)+1e-6; float a=clamp((f-1.)/(gm*1.5)+.5,0.,1.);
+    vec2 gh=g/(f*f); vec3 n=normalize(vec3(-gh*uK,1.));
+    vec3 L=normalize(vec3(-.45,.62,.75));
+    float dif=dot(n,L)*.5+.5; float spec=pow(max(dot(reflect(-L,n),vec3(0.,0.,1.)),0.),38.); spec*=1.-smoothstep(1.7,3.4,f);
+    float rim=pow(1.-n.z,2.);
+    float band=.03*sin(p.x*.011+p.y*.008+uT*1.6)+.02*sin(p.x*.004-p.y*.013-uT*.9);
+    vec3 c=col*(.8+.3*dif)+band+spec*.85+rim*vec3(1.,.86,.72)*.22;
+    float halo=smoothstep(.34,1.,f)*.15*(1.-a);
+    vec3 hc=mix(col,vec3(1.),.35);
+    gl_FragColor=vec4(c*a+hc*halo,a+halo);
+  }`;
+  const sh = (t, s) => { const o = gl.createShader(t); gl.shaderSource(o, s); gl.compileShader(o); if (!gl.getShaderParameter(o, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(o)); return o; };
+  const pr = gl.createProgram(); gl.attachShader(pr, sh(gl.VERTEX_SHADER, vs)); gl.attachShader(pr, sh(gl.FRAGMENT_SHADER, fs)); gl.linkProgram(pr); gl.useProgram(pr);
+  const buf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buf); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
+  const loc = gl.getAttribLocation(pr, "p"); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+  const uB = gl.getUniformLocation(pr, "uB"), uC = gl.getUniformLocation(pr, "uC"), uT = gl.getUniformLocation(pr, "uT"), uK = gl.getUniformLocation(pr, "uK"), uR = gl.getUniformLocation(pr, "uRes"), uN = gl.getUniformLocation(pr, "uN");
+  gl.viewport(0, 0, W, H);
+  const pos = new Float32Array(N * 3), col = new Float32Array(N * 3);
+  return (blobs, t) => {
+    pos.fill(0); col.fill(0);
+    blobs.slice(0, N).forEach((b, i) => { pos[i * 3] = b.x; pos[i * 3 + 1] = H - b.y; pos[i * 3 + 2] = Math.max(0, b.r); col.set(b.c, i * 3); });
+    gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT);
+    if (!blobs.length) return;
+    gl.uniform3fv(uB, pos); gl.uniform3fv(uC, col); gl.uniform1f(uT, t); gl.uniform1f(uK, 40 * U); gl.uniform2f(uR, W, H); gl.uniform1i(uN, Math.min(N, blobs.length));
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+  };
+}
+const liqB = $("liqB"), liqF = $("liqF");
+const drawB = makeLiquid(liqB), drawF = makeLiquid(liqF);
+
+const AN = [[-1.0, -.45, 1.05], [-.82, .82, 1.2], [.95, -.86, 1.1], [1.06, .28, .9], [.22, 1.04, .9], [-.32, -1.02, .75], [.8, .96, 1.0], [-1.1, .18, .72]];
+const ANC = [C.mango, C.orange, C.berry, C.peach, C.grape, C.orange, C.pink, C.gold];
+function hug(r, s, t, B) {
+  if (s <= .001) return;
+  const hw = r.w / 2, hh = r.h / 2, R0 = Math.min(r.w, r.h) * .17 * s;
+  AN.forEach((a, i) => B.push({
+    x: r.cx + (a[0] + Math.cos(t * (.5 + i * .07) + i) * .09) * hw,
+    y: r.cy + (a[1] + Math.sin(t * (.42 + i * .06) + i * 1.3) * .09) * hh,
+    r: R0 * a[2] * (1 + .14 * Math.sin(t * 1.3 + i * 2)), c: ANC[i]
+  }));
+}
+const RC = Math.hypot(W, H) * .62;
+function flood(t, cx, cy, R, B) {
+  if (R <= .5) return;
+  B.push({ x: cx, y: cy, r: R, c: C.orange });
+  const sat = [C.peach, C.orange, C.peach, C.orange, C.peach, C.orange];
+  for (let i = 0; i < 6; i++) { const a = i / 6 * Math.PI * 2 + t * .9; B.push({ x: cx + Math.cos(a) * R * .92, y: cy + Math.sin(a) * R * .92, r: R * (.34 + .05 * Math.sin(t * 3 + i)), c: sat[i] }); }
+}
+const R0 = Math.hypot(W, H) * .55;
+const floodR1 = t => t < 3.0 ? RC * E.inCubic(P(t, 2.66, 3.0)) : t < 3.48 ? lerp(RC, R0, E.inOutSine(P(t, 3.0, 3.48))) : R0 * (1 - E.inOutSine(P(t, 3.48, 3.94)));
+const floodC = t => t < 3.5 ? H / 2 : lerp(H / 2, H * 1.28, E.inCubic(P(t, 3.5, 3.96)));
+const WR = LAND ? H * .3 : W * .34;
+const waveP = t => { const k = E.inOutCubic(P(t, 9.9, 10.46)); return LAND ? lerp(-WR - 40 * U, W + WR + 40 * U, k) : lerp(H + WR + 40 * U, -WR - 40 * U, k); };
+
+/* ---------- 30 s edit: scenes inserted between the proofs and the real site ---------- */
+let TT = 0, LATE = false;
+const LATE0 = 24.9, XSHIFT = 15;
+const EXB = [], EXF = [];
+const waveAxis = (T, t0, rev) => { const k = E.inOutCubic(P(T, t0, t0 + .56)); const a = -WR - 40 * U, b = (LAND ? W : H) + WR + 40 * U; return LAND ? (rev ? lerp(b, a, k) : lerp(a, b, k)) : (rev ? lerp(a, b, k) : lerp(b, a, k)); };
+const sideOf = (rev, isNew) => LAND ? (rev ? (isNew ? "R" : "L") : (isNew ? "L" : "R")) : (rev ? (isNew ? "T" : "B") : (isNew ? "B" : "T"));
+const polyFor = (side, p) => side === "L" ? `polygon(0 0,${p}px 0,${p}px 100%,0 100%)` : side === "R" ? `polygon(${p}px 0,100% 0,100% 100%,${p}px 100%)` : side === "T" ? `polygon(0 0,100% 0,100% ${p}px,0 ${p}px)` : `polygon(0 ${p}px,100% ${p}px,100% 100%,0 100%)`;
+function waveBlobs(p, T, out) {
+  for (let i = -1; i <= 9; i++) { const jit = Math.sin(i * 2.1 + T * 7) * (LAND ? H : W) * .02;
+    out.push(LAND ? { x: p + jit, y: H * i / 8, r: WR, c: ANC[(i + 8) % 8] } : { x: W * i / 8, y: p + jit, r: WR, c: ANC[(i + 8) % 8] }); }
+  for (let i = 0; i < 5; i++) out.push(LAND ? { x: p - W * .07 * (1 + i % 3), y: H * (.1 + .2 * i), r: H * .15, c: ANC[(i * 3) % 8] } : { x: W * (.1 + .2 * i), y: p + H * .035 * (1 + i % 3), r: W * .16, c: ANC[(i * 3) % 8] });
+}
+const CONC = [["pn6", 10.0, "ardoise-menuiserie.fr"], ["pn7", 11.5, "maison-ondine.fr"], ["pn8", 13.0, "valles-avocats.fr"], ["pn9", 14.5, "comptoir-sauvage.fr"]];
+const S8ROWS = [["01", "Échange", "Compte rendu et devis détaillé"], ["02", "Conception", "Maquettes à valider"], ["03", "Création", "Lien de prévisualisation"], ["04", "Validation", "Version finale validée"], ["05", "Mise en ligne", "Site en ligne et prise en main"]];
+const STEP8 = [16.7, 17.65, 18.6, 19.55, 20.5];
+const X8 = {}, X9 = {};
+
+function initExtra() {
+  const s8 = $("s8"), s9 = $("s9");
+  s8.style.visibility = s9.style.visibility = "visible";
+  // ----- S8
+  const h8 = $("s8h"), k8 = $("s8k");
+  h8.style.fontSize = (LAND ? 104 : 108) * U + "px"; h8.style.fontStretch = "90%";
+  const h8h = h8.offsetHeight;
+  const rows = S8ROWS.map(([n, name, sub]) => { const d = document.createElement("div"); d.className = "st8"; d.innerHTML = `<span class="nd8">${n}</span><div class="tx8"><b>${name}</b><small>${sub}</small></div>`; s8.appendChild(d); return d; });
+  const tube = document.createElement("div"); tube.className = "tube8"; tube.innerHTML = "<span></span>"; s8.appendChild(tube);
+  const pitch = (LAND ? 150 : 170) * U, nd = (LAND ? 64 : 76) * U, x0 = LAND ? W * .53 : 90 * U;
+  const hy = LAND ? (H - h8h) / 2 + 24 * U : .1 * H;
+  const y0 = LAND ? (H - (4 * pitch + nd)) / 2 : hy + h8h + 100 * U;
+  const hx = LAND ? 140 * U : 90 * U;
+  Object.assign(X8, { h8, k8, rows, tube, pitch, nd, x0, y0, hx, hy, h8L: [...h8.querySelectorAll(".ln>span")], ok: $("s8ok") });
+  k8.style.transform = `translate(${hx}px,${hy - 60 * U}px)`;
+  h8.style.transform = `translate(${hx}px,${hy}px)`;
+  tube.style.width = 12 * U + "px"; tube.style.height = 4 * pitch + "px";
+  tube.style.transform = `translate(${x0 + nd / 2 - 6 * U}px,${y0 + nd / 2}px)`;
+  X8.okW = X8.ok.offsetWidth; X8.okH = X8.ok.offsetHeight;
+  // ----- S9
+  const h9 = $("s9h"), k9 = $("s9k"), plans = [$("pl1"), $("pl2"), $("pl3")], note = $("s9note");
+  h9.style.fontSize = (LAND ? 96 : 100) * U + "px"; h9.style.fontStretch = "90%";
+  const h9h = h9.offsetHeight;
+  let cw, ch, gap, xs, ys, tx, ty;
+  if (LAND) { cw = 470 * U; ch = 500 * U; gap = 28 * U; const tot = 3 * cw + 2 * gap; tx = (W - tot) / 2; ty = (H - ch) / 2 + 60 * U; xs = [0, 1, 2].map(i => tx + i * (cw + gap)); ys = [ty, ty, ty]; }
+  else { cw = 880 * U; ch = 250 * U; gap = 22 * U; tx = (W - cw) / 2; ty = .21 * H; xs = [tx, tx, tx]; ys = [0, 1, 2].map(i => ty + i * (ch + gap)); }
+  plans.forEach((e, i) => { e.style.width = cw + "px"; e.style.height = ch + "px"; e.classList.toggle("p", !LAND); });
+  const totW = LAND ? 3 * cw + 2 * gap : cw, totH = LAND ? ch : 3 * ch + 2 * gap;
+  Object.assign(X9, { h9, k9, plans, xs, ys, cw, ch, note, noteW: note.offsetWidth, h9L: [...h9.querySelectorAll(".ln>span")],
+    hx: tx, hy: ty - h9h - (LAND ? 70 : 60) * U, noteY: ty + totH + (LAND ? 50 : 44) * U, cards: { cx: tx + totW / 2, cy: ty + totH / 2 + 24 * U, w: totW + 120 * U, h: totH + 30 * U } });
+  k9.style.transform = `translate(${X9.hx}px,${X9.hy - 56 * U}px)`;
+  h9.style.transform = `translate(${X9.hx}px,${X9.hy}px)`;
+  s8.style.visibility = s9.style.visibility = "hidden";
+}
+
+function extraBlobs(T) {
+  [[15.9, false], [21.9, true]].forEach(([t0, rev]) => { if (T >= t0 && T < t0 + .6) waveBlobs(waveAxis(T, t0, rev), T, EXF); });
+  if (T >= 22.0 && T < 25.0) hug(X9.cards, .7 * E.outCubic(P(T, 22.0, 22.7)) * (1 - E.inCubic(P(T, 24.7, 24.95))), T, EXB);
+}
+
+function s7Dom(T) {
+  const fbh = $("fbody").clientHeight;
+  let cur = 0;
+  CONC.forEach(([id, t0, dom], i) => {
+    const el = $(id), tn = i < 3 ? CONC[i + 1][1] : 99;
+    if (T >= t0) cur = i;
+    const ki = E.outExpo(P(T, t0, t0 + .45)), ko = i < 3 ? E.inOutCubic(P(T, tn, tn + .45)) : 0;
+    el.style.visibility = (T >= t0 && T < tn + .5) ? "inherit" : "hidden";
+    el.style.zIndex = 10 + i;
+    el.style.transform = `translateX(${(1 - ki) * 100 - ko * 32}%)`;
+    el.style.filter = ko > 0 ? `brightness(${1 - .35 * ko})` : "none";
+    const cs = el.firstElementChild, maxs = Math.max(0, cs.offsetHeight - fbh);
+    cs.style.transform = `translateY(${-maxs * .62 * E.inOutCubic(P(T, t0 + .35, t0 + 1.4))}px)`;
+  });
+  const p5 = $("pn5"), ko5 = E.inOutCubic(P(T, 10.0, 10.45));
+  p5.style.transform = `translateX(${-ko5 * 32}%)`; p5.style.filter = ko5 > 0 ? `brightness(${1 - .35 * ko5})` : "none"; p5.style.visibility = T >= 10.5 ? "hidden" : "inherit";
+  if (T >= 10.0) { $("url").classList.remove("secure"); $("urlt").textContent = CONC[cur][2]; }
+  const chips = $("chips7"), on7 = T >= 10.0;
+  $("segs").style.display = on7 ? "none" : ""; chips.style.display = on7 ? "block" : "none";
+  chips.style.opacity = P(T, 10.14, 10.4);
+  [...chips.querySelectorAll("span")].forEach((c, i) => c.classList.toggle("on", i === cur));
+  const R = frameRect(9.86), cn = $("cn7"), k = P(T, 10.3, 10.6);
+  cn.style.visibility = "inherit"; cn.style.opacity = k * (1 - P(T, 15.8, 16.0));
+  cn.style.transform = `translate(${R.cx - cn.offsetWidth / 2}px,${R.cy + R.h / 2 + 26 * U}px)`;
+}
+
+function s8Dom(T) {
+  const X = X8;
+  X.k8.style.opacity = P(T, 16.1, 16.4);
+  X.h8L.forEach((sp, i) => lineAnim(sp, T, 16.12 + i * .08, null, { din: .6 }));
+  X.rows.forEach((r, i) => {
+    const ta = STEP8[i], appear = E.outExpo(P(T, 16.3 + i * .06, 16.8 + i * .06)), active = T >= ta;
+    const isCur = active && (i === 4 || T < STEP8[i + 1]);
+    r.classList.toggle("on", active);
+    r.style.opacity = (T < ta ? .3 : isCur ? 1 : .62) * appear;
+    r.firstElementChild.style.transform = `scale(${active ? 1 + .16 * Math.sin(P(T, ta, ta + .38) * Math.PI) : 1})`;
+    r.style.transform = `translate(${X.x0}px,${X.y0 + i * X.pitch + (1 - appear) * 44 * U}px)`;
+  });
+  X.tube.style.opacity = E.outExpo(P(T, 16.4, 16.8));
+  X.tube.firstElementChild.style.transform = `scaleY(${P(T, STEP8[0], STEP8[4])})`;
+  const kk = E.outBack(P(T, 21.4, 21.72), 1.8), ok = X.ok;
+  ok.style.opacity = P(T, 21.4, 21.5);
+  ok.style.transform = `translate(${X.x0}px,${X.y0 + 4 * X.pitch + X.nd + 44 * U}px) scale(${Math.max(0, kk)})`;
+}
+
+function s9Dom(T) {
+  const X = X9, TP = [22.2, 22.5, 22.8];
+  X.k9.style.opacity = P(T, 21.95, 22.2);
+  X.h9L.forEach((sp, i) => lineAnim(sp, T, 22.0 + i * .08, null, { din: .55 }));
+  X.plans.forEach((e, i) => {
+    const k = E.outBack(P(T, TP[i], TP[i] + .5), 1.6), pulse = i === 1 && T > 23.2 ? 1 + .012 * Math.sin((T - 23.2) * 3.4) : 1;
+    e.style.opacity = P(T, TP[i], TP[i] + .12);
+    e.style.transform = `translate(${X.xs[i]}px,${X.ys[i] + (1 - k) * 70 * U}px) scale(${(.92 + .08 * k) * pulse})`;
+    if (i === 1) e.style.setProperty("--ang", (((T - 22.5) * 70) % 360 + 360) % 360 + "deg");
+  });
+  const kn = E.outExpo(P(T, 23.5, 23.9));
+  X.note.style.opacity = kn;
+  X.note.style.transform = `translate(${(W - X.noteW) / 2}px,${X.noteY + (1 - kn) * 18 * U}px)`;
+}
+
+function extraDom(T) {
+  const s34 = $("s34"), s8 = $("s8"), s9 = $("s9");
+  if (T >= 9.7 && T < 16.5) s7Dom(T);
+  else { for (const [id] of CONC) $(id).style.visibility = "hidden"; $("cn7").style.visibility = "hidden"; $("chips7").style.display = "none"; if (T < 9.7) $("segs").style.display = ""; }
+  if (T >= 16.5) s34.style.visibility = "hidden";
+  const p1 = waveAxis(T, 15.9, false), p2 = waveAxis(T, 21.9, true), p3 = waveAxis(T, LATE0, false);
+  const w1 = T >= 15.9 && T < 16.5, w2 = T >= 21.9 && T < 22.5, w3 = T >= LATE0 && T < 25.5;
+  if (w1) s34.style.clipPath = polyFor(sideOf(false, false), p1);
+  s8.style.visibility = (T >= 15.9 && T < 22.5) ? "visible" : "hidden";
+  s8.style.clipPath = w1 ? polyFor(sideOf(false, true), p1) : w2 ? polyFor(sideOf(true, false), p2) : "none";
+  s9.style.visibility = (T >= 21.9 && T < 25.5) ? "visible" : "hidden";
+  s9.style.clipPath = w2 ? polyFor(sideOf(true, true), p2) : w3 ? polyFor(sideOf(false, false), p3) : "none";
+  if (s8.style.visibility === "visible") s8Dom(T);
+  if (s9.style.visibility === "visible") s9Dom(T);
+}
+
+// S2 droplets
+const DROPS = (() => { const r = rng(7), a = []; for (let i = 0; i < 12; i++) { const side = i % 2 ? 1 : -1; a.push({ side, vx: side * (240 + r() * 520), vy: -(520 + r() * 760), r0: 16 + r() * 26, c: [C.orange, C.berry, C.mango, C.pink][i % 4], d: r() * .06 }); } return a; })();
+const CROWN = (() => { const r = rng(11), a = []; for (let i = 0; i < 11; i++) { const ang = -Math.PI * (.1 + .8 * (i / 10)) + (r() - .5) * .18; const sp = 520 + r() * 640; a.push({ vx: Math.cos(ang) * sp, vy: Math.sin(ang) * sp, r0: 8 + r() * 14, c: [C.orange, C.mango, C.berry, C.pink][i % 4] }); } return a; })();
+
+/* ---------- grain ---------- */
+(() => { const c = document.createElement("canvas"); c.width = c.height = 256; const x = c.getContext("2d"); const id = x.createImageData(256, 256); const r = rng(3);
+  for (let i = 0; i < id.data.length; i += 4) { const v = r() > .5 ? 255 : 0; id.data[i] = id.data[i + 1] = id.data[i + 2] = v; id.data[i + 3] = 40 + r() * 110; }
+  x.putImageData(id, 0, 0); $("grain").style.backgroundImage = `url(${c.toDataURL()})`; $("grain").style.backgroundSize = (256 * U) + "px"; })();
+
+/* ---------- helpers for kinetic lines ---------- */
+function lineAnim(span, t, tin, tout, opt = {}) {
+  const din = opt.din || .55, dout = opt.dout || .3;
+  const oe = opt.outEase || E.inExpo;
+  const ki = tin === null ? 1 : E.outExpo(P(t, tin, tin + din));
+  const ko = tout === null ? 0 : oe(P(t, tout, tout + dout));
+  const y = (1 - ki) * 112 - ko * 112;
+  const rot = (1 - ki) * (opt.rot ?? 5);
+  span.style.transform = `translateY(${y}%) rotate(${rot}deg)`;
+  span.parentElement.style.visibility = (tin !== null && t < tin) || (tout !== null && t > tout + dout) ? "hidden" : "inherit";
+}
+
+/* ---------- frame geometry over time ---------- */
+const r3 = () => ({ cx: G.fr3.cx, cy: G.fr3.cy, w: G.fr3.w, h: G.fr3.w * .625 + 46 * U });
+const mixR = (a, b, k) => ({ cx: lerp(a.cx, b.cx, k), cy: lerp(a.cy, b.cy, k), w: lerp(a.w, b.w, k), h: lerp(a.h, b.h, k) });
+function frameRect(t) {
+  const A = r3(), B4 = { ...G.fr4 };
+  if (t < 4.88) return A;
+  if (t < 6.0) return mixR(A, B4, E.inOutCubic(P(t, 4.88, 5.4)));
+  const kt = E.outBack(P(t, 6.04, 6.3), 1.1), kp = E.outBack(P(t, 6.32, 6.6), 1.1), kb = E.outExpo(P(t, 7.0, 7.34));
+  const wp = B4.w * (LAND ? .345 : .36), hp = LAND ? B4.h : B4.h * .96;
+  let w = lerp(B4.w, B4.w * .6, kt); w = lerp(w, wp, kp);
+  let h = lerp(B4.h, hp, kp);
+  if (t >= 7.0) { w = lerp(wp, B4.w, kb); h = lerp(hp, B4.h, kb); }
+  let cx = B4.cx;
+  if (LAND) { cx = lerp(B4.cx, W * .6, kp); if (t >= 7.0) cx = lerp(W * .6, B4.cx, kb); }
+  return { cx, cy: B4.cy, w, h };
+}
+function lapRect(t) {
+  const k = E.outExpo(P(t, 10.1, 10.7));
+  const ry = lerp(-18, -8, E.inOutSine(P(t, 10.0, 12.5))) * Math.PI / 180;
+  const s = .88 + .12 * k;
+  return { cx: G.dev.cx - M.ph.w * .25, cy: G.dev.cy + (1 - k) * 80 * U - M.lap.h * .02, w: M.lap.w * Math.cos(ry) * s, h: M.lap.h * s };
+}
+
+/* ---------- SEEK ---------- */
+let lastSeek = -1;
+function seekCore(t) {
+  lastSeek = t;
+  // ===== S1 + S2 =====
+  const s1 = $("s1"), on1 = t < 2.9;
+  vis(s1, on1);
+  const [shx, shy] = shake(t, 2.35, 18 * U, 8);
+  if (on1) {
+    // text
+    const ex = E.inCubic(P(t, 1.95, 2.2));
+    if (LAND) t1.style.transform = `translate(${G.t1.x - ex * W * .5}px,${G.t1.cy - M.t1h / 2}px)`;
+    else t1.style.transform = `translate(${G.t1.x}px,${G.t1.top - ex * H * .45}px)`;
+    t1.style.opacity = 1 - P(t, 2.08, 2.2);
+    lineAnim(t1L[0], t, .1, null); lineAnim(t1L[1], t, .55, null); lineAnim(t1L[2], t, 1.0, null);
+    const j = t1L[2];
+    const droop = E.outBack(P(t, 1.3, 1.75), 2.2);
+    j.style.color = "#8A8692";
+    j.style.fontVariationSettings = `"wght" ${lerp(420, 300, E.outCubic(P(t, 1.0, 1.5)))},"wdth" ${lerp(92, 76, E.outCubic(P(t, 1.0, 1.5)))}`;
+    j.style.transform += ` scaleY(${1 - .1 * droop}) skewX(${-4 * droop}deg)`;
+    const sd = $("sadrop"), dk = P(t, 1.45, 1.97);
+    const grow = cl(dk / .12), fall = E.inQuad(dk) * G.t1.fs * 1.2;
+    sd.style.transform = `translate(${M.sad.x}px,${M.sad.y + fall}px) scale(${grow * (1 + .12 * Math.sin(Math.min(1, dk * 2) * Math.PI))},${grow * (1 + .5 * dk)})`;
+    sd.style.opacity = dk <= 0 ? 0 : 1 - P(t, 1.82, 1.97);
+    // card
+    const mv = E.inOutCubic(P(t, 2.0, 2.35));
+    const sc0 = lerp(.97, 1, P(t, 0, 2)) * (1 + .035 * E.inOutSine(P(t, 0, 2)));
+    const scT = LAND ? 1.12 : 1.0;
+    const cx = lerp(G.card.cx, W / 2, mv), cy = lerp(G.card.cy, H / 2, mv);
+    const sc = lerp(sc0, scT, mv);
+    const rot = lerp(lerp(-4, -2, P(t, 0, 2)), 0, mv);
+    const sq = E.outQuart(P(t, 2.35, 2.62));
+    const sy = 1 - .94 * sq, sx = 1 + .08 * sq;
+    oldEl.style.transform = `translate(${cx - M.card.w / 2 + shx}px,${cy - M.card.h / 2 + shy + Math.sin(t * 2.2) * 5 * U * (1 - mv)}px) rotate(${rot}deg) scale(${sc * sx},${sc * sy})`;
+    oldEl.style.filter = `saturate(${.8 - .3 * sq}) brightness(${1 - .15 * sq})`;
+    vis(oldEl, t < 2.5);
+    $("cnt").textContent = String(1337 + Math.floor(t * 9)).padStart(6, "0");
+  }
+  // plates
+  const pl = $("plates"), onP = t >= 2.0 && t < 2.9; vis(pl, onP);
+  if (onP) {
+    const phH = H * .56, ch = M.card.h * (LAND ? 1.12 : 1.0);
+    const contact = H / 2 - ch / 2;
+    let top;
+    if (t < 2.35) top = lerp(-30 * U, contact, E.inCubic(P(t, 2.0, 2.35)));
+    else if (t < 2.62) top = H / 2 - ch * (1 - .94 * E.outQuart(P(t, 2.35, 2.62))) / 2;
+    else top = lerp(H / 2 - ch * .03, -60 * U, E.inExpo(P(t, 2.62, 2.86)));
+    const pt = $("pt"), pb = $("pb");
+    pt.style.height = pb.style.height = phH + "px";
+    pt.style.transform = `translate(${shx}px,${top - phH + shy}px)`;
+    pb.style.transform = `translate(${shx}px,${H - top + shy}px)`;
+  }
+  // ===== S3 wordmark =====
+  const w3 = $("w3"), on3 = t >= 3.0 && t < 3.64; vis(w3, on3);
+  if (on3) {
+    const k = E.outExpo(P(t, 3.0, 3.45)), ko = E.inCubic(P(t, 3.46, 3.62));
+    w3.style.transform = `translateY(${-ko * 60 * U}px) scale(${lerp(LAND ? 1.3 : 1.08, 1, k) * (1 - .12 * ko)})`;
+    w3.style.opacity = 1 - ko;
+    w3L.forEach((s, i) => { const kk = E.outExpo(P(t, 3.0 + i * .018, 3.42 + i * .018)); s.style.transform = `translateY(${(1 - kk) * 45}%)`; s.style.fontVariationSettings = `"wdth" ${lerp(125, 100, kk)},"wght" ${lerp(900, 800, kk)}`; });
+    const kd = E.outBack(P(t, 3.02, 3.36), 2);
+    w3d.style.transform = `scale(${Math.max(0, kd)}) rotate(${(1 - kd) * -35}deg)`;
+  }
+  const fl = $("flash");
+  fl.style.opacity = t >= 3.0 && t < 3.14 ? .4 * (1 - P(t, 3.0, 3.14)) : 0;
+
+  // ===== S3/S4 frame + labels =====
+  const s34 = $("s34"), on34 = t >= 3.5 && t < 10.5 && !LATE; vis(s34, on34);
+  const wv = t >= 9.9 && t < 10.5, wp = waveP(t);
+  s34.style.clipPath = wv ? (LAND ? `polygon(${wp}px 0,100% 0,100% 100%,${wp}px 100%)` : `polygon(0 0,100% 0,100% ${wp}px,0 ${wp}px)`) : "none";
+  if (on34) {
+    const R = frameRect(t);
+    const ke = E.outExpo(P(t, 3.56, 4.26));
+    const push = .04 * E.inOutCubic(P(t, 4.15, 4.9)) * (1 - E.inOutCubic(P(t, 4.88, 5.4)));
+    const drift = lerp(-4, 2, E.inOutSine(P(t, 3.8, 4.9))) * (1 - E.inOutCubic(P(t, 4.88, 5.4)));
+    const fy = TT > 5.3 ? Math.sin(TT * 1.7) * 4 * U : 0;
+    fr.style.width = R.w + "px"; fr.style.height = R.h + "px";
+    fr.style.borderRadius = lerp(20, 46, P(R.w, G.fr4.w * .6, G.fr4.w * .36)) * U + "px";
+    fr.style.transform = `translate(${R.cx - R.w / 2}px,${R.cy - R.h / 2 + (1 - ke) * H * .5 + fy}px) rotateX(${(1 - ke) * 28}deg) rotateY(${drift}deg) scale(${(.86 + .14 * ke) * (1 + push)})`;
+    vis(fr, t >= 3.56);
+    // panels
+    const PN = [[3.56, 5.08], [5.08, 6.0], [6.0, 7.0], [7.0, 8.0], [8.0, 9.0], [9.0, 10.0]];
+    PN.forEach(([s, e], i) => {
+      const el = $("pn" + i);
+      const ki = i === 0 ? 1 : E.outExpo(P(t, s, s + .45));
+      const ko = i === 5 ? 0 : E.inOutCubic(P(t, e, e + .45));
+      const on = t >= s && t < e + .45;
+      el.style.visibility = on ? "inherit" : "hidden";
+      el.style.zIndex = i;
+      el.style.transform = `translateX(${(1 - ki) * 100 - ko * 32}%)`;
+      el.style.filter = ko > 0 ? `brightness(${1 - .35 * ko})` : "none";
+    });
+    // url bar
+    const url = $("url"), urlt = $("urlt");
+    const sec = t >= 8.5 && t < 9.0;
+    url.classList.toggle("secure", sec);
+    urlt.innerHTML = t < 5.08 ? (URLTXT || "juicecraft") : t >= 9.0 ? (t >= 9.58 ? "recherche · menuisier sur mesure" : "recherche") : sec ? "<b>https://</b>votre-site.fr" : "votre-site.fr";
+    // pn1 styles + wipes
+    const pn1 = $("pn1"); pn1.dataset.s = t < 5.333 ? "elegant" : t < 5.667 ? "bold" : "minimal";
+    const wipe = $("wipe");
+    let wk = -1; [5.333, 5.667].forEach(ts => { if (t >= ts - .17 && t < ts + .2) wk = E.inOutCubic(P(t, ts - .17, ts + .2)); });
+    vis(wipe, wk >= 0); if (wk >= 0) wipe.style.transform = `translateX(${lerp(-110, 300, wk)}%)`;
+    // pn3 gauge
+    const v = 98 * E.outCubic(P(t, 7.08, 7.75));
+    $("gfg").style.strokeDashoffset = 100 - v;
+    const gn = $("gnum"); gn.textContent = Math.round(v);
+    const gp = P(t, 7.75, 8.05); gn.style.display = "inline-block"; gn.style.transform = `scale(${1 + .08 * Math.sin(gp * Math.PI)})`;
+    [[ "gm1", 7.2, .94], ["gm2", 7.3, .97], ["gm3", 7.4, .98]].forEach(([id, a, f]) => $(id).style.width = (E.outExpo(P(t, a, a + .6)) * f * 100) + "%");
+    // pn4 lock
+    const shk = $("shk");
+    let sy2 = -13; if (t >= 8.42) { const d = t - 8.52; sy2 = t < 8.52 ? lerp(-13, 0, E.inQuad(P(t, 8.42, 8.52))) : -2.4 * Math.exp(-d * 14) * Math.abs(Math.sin(d * 26)); }
+    shk.setAttribute("transform", `translate(0 ${sy2})`);
+    const lockOn = t >= 8.5;
+    shk.setAttribute("stroke", lockOn ? "#1FA971" : "#2B2731"); $("lbody").setAttribute("fill", lockOn ? "#1FA971" : "#2B2731");
+    $("lpill").classList.toggle("on", lockOn);
+    const rp = P(t, 8.5, 8.95), lr = $("lring"); lr.style.opacity = rp > 0 && rp < 1 ? .7 * (1 - rp) : 0; lr.style.transform = `scale(${.7 + 1.1 * E.outCubic(rp)})`;
+    const lc = $("lcard"), lck = E.outBack(P(t, 8.6, 8.9), 1.6); lc.style.opacity = P(t, 8.6, 8.7); lc.style.transform = `translateY(${(1 - lck) * 60}%) scale(${.9 + .1 * lck})`;
+    // pn5 search
+    const q = "menuisier sur mesure"; const n = Math.round(P(t, 9.05, 9.55) * q.length);
+    $("sq").textContent = q.slice(0, n);
+    $("caret").style.visibility = t < 9.62 && (Math.floor(t * 3.6) % 2 === 0 || (t > 9.05 && t < 9.56)) ? "visible" : "hidden";
+    [["sr1", 9.6], ["sr2", 9.68], ["sr3", 9.76]].forEach(([id, a]) => { const e = $(id), k2 = E.outExpo(P(t, a, a + .35)); e.style.opacity = P(t, a, a + .12); e.style.transform = `translateY(${(1 - k2) * 30 * U}px)`; });
+        // badges
+    const BD = LAND ? [["bd1", 4.25, -.04, .22, "l"], ["bd2", 4.5, .97, -.05, "r"], ["bd3", 4.75, .98, .8, "r"]]
+      : [["bd1", 4.25, .05, -.15, "l"], ["bd2", 4.5, .6, -.15, "l"], ["bd3", 4.75, .3, .96, "l"]];
+    const bs = LAND ? 1.28 : 1.1;
+    BD.forEach(([id, a, fx, fy2, side], i) => {
+      const e = $(id), mb = M.badges[i];
+      const k = E.outBack(P(t, a, a + .32), 2.0), ko = E.inCubic(P(t, 4.92, 5.08));
+      let L = R.cx - R.w / 2 + R.w * fx - (side === "l" ? mb.w * bs * .35 : mb.w * bs * .7);
+      let T = R.cy - R.h / 2 + R.h * fy2 + Math.sin(t * 2.4 + i) * 6 * U;
+      L = LAND ? cl(L, 40 * U, W - mb.w * bs - 40 * U) : cl(L, 40 * U, W * .86 - mb.w * bs);
+      if (!LAND) T = Math.min(T, H * .74 - mb.h * bs);
+      e.style.transform = `translate(${L + (bs - 1) * mb.w / 2}px,${T + (bs - 1) * mb.h / 2}px) scale(${Math.max(0, k) * bs * (1 - .3 * ko)})`;
+      e.style.opacity = P(t, a, a + .1) * (1 - ko);
+      vis(e, t >= a && t < 5.1);
+    });
+    // caption
+    vis(cap3, t >= 3.6 && t < 5.15);
+    cap3.style.transform = `translate(${(W - M.cap3.w) / 2}px,${G.cap3.y - M.cap3.h / 2 + (LAND ? 0 : M.cap3.h * .1)}px)`;
+    cap3L.forEach((s, i) => lineAnim(s, t, 3.62 + i * .07, (LAND ? 4.86 : 4.62) + i * .04, { dout: .26 }));
+    // labels (driven by the real timeline TT so they can run past the frozen S4 core)
+    const lab = $("lab"); vis(lab, TT >= 4.98);
+    const LT = [5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 16.0];
+    const bi = Math.min(5, Math.max(0, Math.floor(TT - 5.0)));
+    const labH = lerp(bi > 0 ? M.lab[bi - 1].h : M.lab[0].h, M.lab[bi].h, E.inOutCubic(P(TT, LT[bi] - .08, LT[bi] + .24)));
+    if (LAND) lab.style.transform = `translate(${G.lab.x}px,${G.lab.cy - (labH + M.labk + 60 * U) / 2}px)`;
+    else lab.style.transform = `translate(${G.lab.x}px,${G.lab.top}px)`;
+    $("labs").style.cssText = `position:relative;height:${labH}px;margin:${26 * U}px 0 ${30 * U}px`;
+    labEls.forEach((el, i) => {
+      el.style.top = "0px";
+      labBlocks[i].forEach((s, j) => lineAnim(s, TT, LT[i] + .04 + j * .06, i < 5 ? LT[i + 1] - .3 + j * .03 : null, { din: .5, dout: .22, outEase: E.inOutCubic }));
+    });
+    const kIdx = Math.min(5, Math.max(0, Math.floor(TT - 5.05)));
+    const lk = $("labk"); lk.textContent = KICK[kIdx];
+    const kph = TT - (LT[kIdx] + .05); lk.style.opacity = TT < 5.05 ? 0 : cl(kph / .18) * (kIdx < 5 ? 1 - P(TT, LT[kIdx + 1] - .1, LT[kIdx + 1]) : 1);
+    segB.forEach((b, i) => b.style.transform = `scaleX(${P(TT, LT[i], LT[i + 1])})`);
+    $("segs").style.opacity = P(TT, 5.0, 5.2);
+    // readout
+    const ro = $("ro"), onR = t >= 6.0 && t < 7.1; vis(ro, onR);
+    if (onR) { ro.textContent = t < 6.17 ? "1440\u00a0px" : t < 6.46 ? "768\u00a0px" : "390\u00a0px"; const k = E.outExpo(P(t, 6.0, 6.3)), ko = P(t, 6.95, 7.1);
+      ro.style.transform = `translate(${R.cx - M.ro.w / 2}px,${R.cy + R.h / 2 + 26 * U + (1 - k) * 20 * U}px)`; ro.style.opacity = k * (1 - ko); }
+  }
+
+  // ===== S5 =====
+  const s5 = $("s5"), on5 = t >= 9.9 && t < 12.9; vis(s5, on5);
+  s5.style.clipPath = wv ? (LAND ? `polygon(0 0,${wp}px 0,${wp}px 100%,0 100%)` : `polygon(0 ${wp}px,100% ${wp}px,100% 100%,0 100%)`) : "none";
+  if (on5) {
+    const k = E.outExpo(P(t, 10.1, 10.7));
+    const ry = lerp(-18, -8, E.inOutSine(P(t, 10.0, 12.5)));
+    const s = .88 + .12 * k;
+    const dev = $("dev");
+    const lw = M.lap.w, lh = M.lap.h, pw = M.ph.w, ph2 = M.ph.h;
+    const gx = G.dev.cx - M.ph.w * .25, gy = G.dev.cy;
+    dev.style.transform = `translate(${gx}px,${gy + (1 - k) * 80 * U}px) rotateY(${ry}deg) rotateX(4deg) scale(${s})`;
+    $("lap").style.transform = `translate(${-lw / 2}px,${-lh / 2 - lh * .02}px)`;
+    $("phone").style.transform = `translate(${lw / 2 - pw * .55}px,${lh / 2 - ph2 * .78}px) translateZ(${90 * U}px)`;
+    const dsh = $("dsh"); dsh.style.width = (lw * 1.25 * s) + "px"; dsh.style.height = (60 * U) + "px";
+    dsh.style.transform = `translate(${gx - lw * .62 * s}px,${gy + lh * .55 * s + (1 - k) * 80 * U}px)`; dsh.style.opacity = k;
+    // scroll
+    const sc1 = 1100 + E.inOutCubic(P(t, 10.45, 11.2)) * 850 + E.inOutCubic(P(t, 11.45, 12.35)) * 1150;
+    $("limg").style.transform = `translateY(${-sc1 * 1.5 * M.limgScale}px)`;
+    const sc2 = 960 + E.inOutCubic(P(t, 10.5, 12.35)) * 1700;
+    $("pimg").style.transform = `translateY(${-sc2 * 2 * M.pimgScale}px)`;
+    // headline
+    if (LAND) h5.style.transform = `translate(${G.h5.x}px,${G.h5.cy - M.h5.h / 2}px)`;
+    else h5.style.transform = `translate(${G.h5.x}px,${G.h5.top}px)`;
+    h5L.forEach((sp, i) => lineAnim(sp, t, 10.16 + i * .08, null, { din: .6 }));
+    const RT = [10.0, 10.5, 11.0, 11.5];
+    let cur = 0; RT.forEach((r, i) => { if (t >= r) cur = i; });
+    rotWords.forEach((w, i) => {
+      let y = 120;
+      const kr = E.inOutCubic(P(t, RT[cur], RT[cur] + .36));
+      if (i === cur) y = i === 0 ? 0 : (1 - kr) * 108;
+      else if (i === cur - 1) y = -kr * 108;
+      w.style.transform = `translateY(${y}%)`;
+    });
+    const prevW = cur > 0 ? M.rot[cur - 1] : M.rot[0], kw = cur > 0 ? E.inOutCubic(P(t, RT[cur], RT[cur] + .4)) : 1;
+    const rb = $("rotbar"); rb.style.width = lerp(prevW, M.rot[cur], kw) + "px";
+    rb.style.transform = `scaleX(${cur === 0 ? E.outExpo(P(t, 10.4, 10.8)) : 1})`;
+    // jus press at 12.0
+    const jp = P(t, 12.0, 12.45), j5 = $("jus5");
+    let wd = 100, wg = 800, scy = 1;
+    if (jp > 0 && jp < 1) { if (jp < .25) { const a = jp / .25; wd = lerp(100, 125, a); wg = lerp(800, 900, a); scy = lerp(1, .8, a); } else if (jp < .55) { const a = (jp - .25) / .3; wd = lerp(125, 84, a); wg = lerp(900, 760, a); scy = lerp(.8, 1.08, a); } else { const a = E.outCubic((jp - .55) / .45); wd = lerp(84, 100, a); wg = lerp(760, 800, a); scy = lerp(1.08, 1, a); } }
+    j5.style.fontVariationSettings = `"wdth" ${wd},"wght" ${wg}`; j5.style.transform = `scaleY(${scy})`;
+  }
+
+  // ===== S6 =====
+  const ink = $("ink6"), onI = t >= 12.3; vis(ink, onI);
+  if (onI) {
+    const pr = E.inOutCubic(P(t, 12.3, 12.82)), base = lerp(-110 * U, H + 150 * U, pr), pts = [];
+    const env = Math.sin(Math.min(1, pr * 1.02) * Math.PI * .98 + .01);
+    for (let i = 0; i <= 96; i++) { const x = i / 96 * W, u = i / 96 * Math.PI * 2; const dr = (.5 + .5 * Math.sin(u * 3.1 + 1)) * (.5 + .5 * Math.sin(u * 1.7 + .4)) * 150 * U * env; pts.push(`${x.toFixed(1)}px ${(base + dr).toFixed(1)}px`); }
+    ink.style.clipPath = `polygon(0 0,100% 0,${pts.reverse().join(",")})`;
+  }
+  const s6 = $("s6"), on6 = t >= 12.5; vis(s6, on6);
+  if (on6) {
+    const [sx6, sy6] = shake(t, 13.0, 7 * U, 10);
+    s6.style.transform = `translate(${sx6}px,${sy6}px) scale(${1 + .025 * E.inOutSine(P(t, 13.0, 15.0))})`;
+    s6.style.transformOrigin = `50% ${G.s6.cy / H * 100}%`;
+    const lk = $("lock6"); lk.style.transform = `translate(${(W - M.lock.w) / 2 - M.lockShift}px,${G.s6.cy - M.lock.h / 2}px)`;
+    const kd = E.outBack(P(t, 13.02, 13.38), 2.4); d6.style.transform = `scale(${Math.max(0, kd)}) rotate(${(1 - kd) * -25}deg)`; vis(d6, t >= 13.02);
+    wm6L.forEach((s, i) => { const kk = E.outExpo(P(t, 13.1 + i * .028, 13.6 + i * .028)); s.style.transform = `translateY(${(1 - kk) * 60}%)`; s.style.opacity = P(t, 13.1 + i * .028, 13.2 + i * .028); s.style.fontVariationSettings = `"wdth" ${lerp(125, 100, kk)},"wght" ${lerp(900, 800, kk)}`; });
+    const gw = $("glow6"), gk = lerp(.4 * E.outCubic(P(t, 12.7, 13.0)), 1, E.outCubic(P(t, 13.0, 13.8))), gsz = (LAND ? 1300 : 1100) * U * (1 + .04 * Math.sin(t * 2.2));
+    gw.style.width = gw.style.height = gsz + "px"; gw.style.transform = `translate(${W / 2 - gsz / 2}px,${G.s6.cy - gsz / 2}px)`; gw.style.opacity = gk;
+    const ty = G.s6.cy + M.lock.h / 2 + 34 * U;
+    tag6.style.transform = `translate(${(W - M.tag6.w) / 2}px,${ty}px)`;
+    tag6L.forEach(s => lineAnim(s, t, 13.4, null, { din: .6 }));
+    const cta = $("cta6"), kc = E.outBack(P(t, 13.8, 14.2), 1.8);
+    const cy6 = ty + M.tag6.h + 54 * U;
+    cta.style.transform = `translate(${(W - M.cta.w) / 2}px,${cy6}px) scale(${Math.max(0, kc)})`; cta.style.opacity = P(t, 13.8, 13.9); vis(cta, t >= 13.8);
+    const sub = $("sub6"), ks = E.outExpo(P(t, 13.9, 14.35));
+    const syy = cy6 + M.cta.h + 44 * U;
+    const lg = $("legal6"), kl = E.outExpo(P(t, 14.0, 14.45));
+    lg.style.transform = `translate(${(W - M.legal.w) / 2}px,${syy + (URLTXT ? M.url.h : M.sub.h) + 26 * U + (1 - kl) * 12 * U}px)`; lg.style.opacity = kl * .95;
+    if (URLTXT) { const u6 = $("url6"); u6.style.transform = `translate(${(W - M.url.w) / 2}px,${syy + (1 - ks) * 16 * U}px)`; u6.style.opacity = ks; sub.style.opacity = 0; }
+    else { sub.style.transform = `translate(${(W - M.sub.w) / 2}px,${syy + (1 - ks) * 16 * U}px)`; sub.style.opacity = ks; }
+  }
+
+  // ===== liquid =====
+  const BB = [], BF = [];
+  if (t >= 3.0 && t < 4.0) flood(t, W / 2, floodC(t), floodR1(t), BB);
+  if (TT >= 3.5 && TT < 16.5 && !LATE) {
+    const s = E.outCubic(P(TT, 3.6, 4.2)) * lerp(1, .64, E.inOutCubic(P(TT, 4.9, 5.32))) * (1 - E.inCubic(P(TT, 15.9, 16.2)));
+    hug(frameRect(Math.min(TT, 9.86)), s, TT, BB);
+  }
+  if (t >= 10.42 && t < 12.85) hug(lapRect(t), .6 * E.outCubic(P(t, 10.42, 10.95)), t, BB);
+  if (t >= 2.36 && t < 3.0) {
+    const half = Math.min(M.card.w * (LAND ? 1.12 : 1) * .5, W * .4);
+    DROPS.forEach(d => { const t0 = 2.4 + d.d; if (t < t0) return; const dt = t - t0, gpx = 2400 * U;
+      BF.push({ x: W / 2 + d.side * half * .9 + d.vx * U * dt, y: H / 2 + d.vy * U * dt + .5 * gpx * dt * dt, r: d.r0 * U * E.outCubic(P(t, t0, t0 + .08)) * (1 - .45 * P(t, t0, 3.0)), c: d.c }); });
+    const env = E.outCubic(P(t, 2.38, 2.6)) * (1 - E.inCubic(P(t, 2.72, 2.9)));
+    const spread = half * (.7 + .5 * E.outExpo(P(t, 2.38, 2.74)));
+    for (let i = 0; i < 17; i++) { const u = (i - 8) / 8; BF.push({ x: W / 2 + u * spread, y: H / 2 + Math.sin(i * 1.9 + t * 11) * 5 * U, r: 50 * U * env * (.8 + .3 * Math.sin(i * 2.3 + t * 9)), c: [C.orange, C.berry, C.mango, C.peach][i % 4] }); }
+    flood(t, W / 2, floodC(t), floodR1(t), BF);
+  }
+  if (t >= 9.9 && t < 10.5) {
+    const p = waveP(t);
+    for (let i = -1; i <= 9; i++) { const jit = Math.sin(i * 2.1 + t * 7) * (LAND ? H : W) * .02;
+      BF.push(LAND ? { x: p + jit, y: H * i / 8, r: WR, c: ANC[(i + 8) % 8] } : { x: W * i / 8, y: p + jit, r: WR, c: ANC[(i + 8) % 8] }); }
+    for (let i = 0; i < 5; i++) BF.push(LAND ? { x: p - W * .07 * (1 + i % 3), y: H * (.1 + .2 * i), r: H * .15, c: ANC[(i * 3) % 8] } : { x: W * (.1 + .2 * i), y: p + H * .035 * (1 + i % 3), r: W * .16, c: ANC[(i * 3) % 8] });
+  }
+  if (t >= 12.5 && t < 13.7) {
+    const x0 = M.d6x, yI = M.d6y + G.s6.d * .12;
+    if (t < 12.97) { const k = E.inQuad(P(t, 12.5, 12.97)); const y = lerp(H * .05, yI, k); const st = 1 + .55 * k, g = E.outCubic(P(t, 12.5, 12.62));
+      BF.push({ x: x0, y, r: 62 * U * g, c: C.orange }); BF.push({ x: x0, y: y - 30 * U * st, r: 42 * U * g, c: C.peach }); BF.push({ x: x0, y: y - 54 * U * st, r: 26 * U * g, c: C.mango }); BF.push({ x: x0, y: y - 80 * U * st, r: 14 * U * g, c: C.gold }); }
+    else {
+      const dt = t - 12.97, spread = E.outCubic(P(t, 12.97, 13.12)) * 78 * U, shrink = 1 - E.inCubic(P(t, 13.06, 13.36));
+      BF.push({ x: x0 - spread, y: yI + 8 * U, r: 36 * U * shrink, c: C.orange }); BF.push({ x: x0 + spread, y: yI + 8 * U, r: 36 * U * shrink, c: C.berry }); BF.push({ x: x0, y: yI, r: 40 * U * shrink, c: C.peach });
+      CROWN.forEach(c => { const g = 2600 * U; BF.push({ x: x0 + Math.sign(c.vx) * 24 * U + c.vx * U * dt, y: yI + c.vy * U * dt + .5 * g * dt * dt, r: c.r0 * U * E.outCubic(P(t, 12.97, 13.05)) * (1 - P(t, 13.15, 13.62)), c: c.c }); });
+    }
+  }
+  EXB.forEach(b => BB.push(b)); EXF.forEach(b => BF.push(b));
+  const tl = LATE ? t : TT;
+  drawB(BB, tl); drawF(BF, tl);
+  liqF.style.zIndex = t < 3.05 ? 7 : t < 12.0 ? 10 : 12;
+
+  // ===== finishing =====
+  const f = Math.round((LATE ? t : TT) * 60), r = rng(f * 7919 + 13);
+  $("grain").style.transform = `translate(${(r() * 256 * U) | 0}px,${(r() * 256 * U) | 0}px)`;
+  const dark = (LATE && t >= 12.5) || (TT >= 15.9 && TT < 22.4);
+  $("grain").style.opacity = dark ? .07 : .05;
+  $("vig").style.opacity = dark ? 1.4 : .8;
+}
+
+function seek(T) {
+  TT = T; LATE = T >= LATE0;
+  const tc = LATE ? T - XSHIFT : Math.min(T, 9.86);
+  EXB.length = 0; EXF.length = 0;
+  extraBlobs(T);
+  seekCore(tc);
+  extraDom(T);
+}
+
+window.READY = false;
+(async () => {
+  await document.fonts.ready;
+  const fams = ['800 100px "Mona Sans"', '900 100px "Mona Sans"', '300 100px "Mona Sans"', '600 100px "Mona Sans"', '400 20px "Instrument Sans"', '600 20px "Instrument Sans"', '400 20px "Geist Mono"', '500 20px "Geist Mono"', '400 20px "Instrument Serif"'];
+  await Promise.all(fams.map(f => document.fonts.load(f, "juicecraft éèà 0123")));
+  await Promise.all([...document.images].map(im => im.complete ? 0 : new Promise(r => { im.onload = im.onerror = r; })));
+  // make everything measurable
+  ["s1", "s34", "s5", "s6", "w3", "lab", "fr"].forEach(id => $(id).style.visibility = "visible");
+  measure();
+  ["s1", "s34", "s5", "s6", "w3", "lab", "fr"].forEach(id => $(id).style.visibility = "");
+  initExtra();
+  seek(+(Q.get("t") || 0));
+  window.READY = true;
+})();
+window.seek = seek;
+</script>
+</body></html>

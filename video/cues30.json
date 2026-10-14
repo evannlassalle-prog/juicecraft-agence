@@ -1,0 +1,313 @@
+{
+ "title": "juicecraft — pub 30 s",
+ "duration_s": 30.0,
+ "fps": 60,
+ "bpm": 120,
+ "beat_s": 0.5,
+ "bar_s": 2.0,
+ "music_key": "F minor (Fm – Db – Ab – Eb, one chord per bar once the drop hits)",
+ "sections": [
+  {
+   "name": "HOOK",
+   "start": 0,
+   "end": 2
+  },
+  {
+   "name": "PRESS",
+   "start": 2,
+   "end": 3
+  },
+  {
+   "name": "DROP_REVEAL",
+   "start": 3,
+   "end": 5
+  },
+  {
+   "name": "PROOF",
+   "start": 5,
+   "end": 10
+  },
+  {
+   "name": "REALISATIONS",
+   "start": 10,
+   "end": 16
+  },
+  {
+   "name": "METHODE (breakdown)",
+   "start": 16,
+   "end": 22
+  },
+  {
+   "name": "OFFRES (2e drop)",
+   "start": 22,
+   "end": 25
+  },
+  {
+   "name": "REAL_SITE",
+   "start": 25,
+   "end": 27.5
+  },
+  {
+   "name": "END_CARD",
+   "start": 27.5,
+   "end": 30
+  }
+ ],
+ "sfx": [
+  {
+   "t": 0.1,
+   "type": "pop",
+   "note": "word 'Votre site' slams in — short punchy tick/pop"
+  },
+  {
+   "t": 0.55,
+   "type": "pop",
+   "note": "word 'manque de' — pop, slightly higher"
+  },
+  {
+   "t": 1.0,
+   "type": "sad_blip",
+   "note": "word 'jus ?' appears thin and deflated — downward pitch blip (deflating), comedic but classy"
+  },
+  {
+   "t": 1.5,
+   "type": "riser_start",
+   "note": "riser begins, ends exactly at 3.0"
+  },
+  {
+   "t": 2.0,
+   "type": "whoosh_in",
+   "note": "two press plates start moving (top & bottom) — whoosh building into impact"
+  },
+  {
+   "t": 2.35,
+   "type": "heavy_impact",
+   "note": "press plates slam on the old website — heavy thud + crunch"
+  },
+  {
+   "t": 2.4,
+   "type": "squish_splash",
+   "note": "site is squeezed, juice spurts out — wet squelch + liquid splash (2.40-2.85)"
+  },
+  {
+   "t": 3.0,
+   "type": "drop_impact",
+   "note": "THE DROP — big impact + juicy 'bloop' + music kicks in; logo 'juicecraft' punches in"
+  },
+  {
+   "t": 3.5,
+   "type": "liquid_whoosh",
+   "note": "juice drains, browser with the site rises — liquid swoosh"
+  },
+  {
+   "t": 4.25,
+   "type": "notif_pop",
+   "note": "badge 'Formulaire reçu' pops — bright UI notification blip"
+  },
+  {
+   "t": 4.5,
+   "type": "notif_pop",
+   "note": "badge 'Site en ligne' pops — blip, a third higher"
+  },
+  {
+   "t": 4.75,
+   "type": "notif_pop",
+   "note": "badge 'Paiement sécurisé' pops — blip, a fifth higher"
+  },
+  {
+   "t": 5.0,
+   "type": "swish",
+   "note": "label 'Sur mesure.' + style switch to Élégant"
+  },
+  {
+   "t": 5.333,
+   "type": "swish",
+   "note": "style switch to Audacieux (triplet)"
+  },
+  {
+   "t": 5.667,
+   "type": "swish",
+   "note": "style switch to Minimal (triplet)"
+  },
+  {
+   "t": 6.0,
+   "type": "swish_low",
+   "note": "label 'Sur tous les écrans.'; frame starts resizing"
+  },
+  {
+   "t": 6.25,
+   "type": "click",
+   "note": "resize detent tablet"
+  },
+  {
+   "t": 6.55,
+   "type": "click",
+   "note": "resize detent phone"
+  },
+  {
+   "t": 7.0,
+   "type": "whir_up",
+   "note": "label 'Rapide.'; speed gauge counts 0 -> 98 over 7.0-7.75 — rising whir"
+  },
+  {
+   "t": 7.75,
+   "type": "ding",
+   "note": "gauge reaches 98 — clean bright ding"
+  },
+  {
+   "t": 8.0,
+   "type": "swish_low",
+   "note": "label 'Sécurisé.'"
+  },
+  {
+   "t": 8.5,
+   "type": "lock_clack",
+   "note": "padlock shackle snaps shut — metallic clack"
+  },
+  {
+   "t": 9.0,
+   "type": "swish",
+   "note": "label 'Visible.'"
+  },
+  {
+   "t": 9.05,
+   "type": "typing",
+   "note": "keyboard typing 9.05-9.55, ~14 soft key clicks"
+  },
+  {
+   "t": 9.6,
+   "type": "result_pop",
+   "note": "search result appears — soft pop"
+  },
+  {
+   "t": 10.0,
+   "type": "swish_low",
+   "note": "S7 Réalisations: label 'Pour chaque métier.' + 1er concept (Ardoise) glisse dans le cadre"
+  },
+  {
+   "t": 11.5,
+   "type": "swish",
+   "note": "concept 2 (boutique)"
+  },
+  {
+   "t": 13.0,
+   "type": "swish",
+   "note": "concept 3 (cabinet)"
+  },
+  {
+   "t": 14.5,
+   "type": "swish",
+   "note": "concept 4 (restaurant)"
+  },
+  {
+   "t": 15.85,
+   "type": "liquid_whoosh",
+   "note": "vague de jus S7 -> S8 (méthode), le groove se coupe a 16.0"
+  },
+  {
+   "t": 16.7,
+   "type": "step_pop",
+   "note": "étape 1 Échange"
+  },
+  {
+   "t": 17.65,
+   "type": "step_pop",
+   "note": "étape 2 Conception"
+  },
+  {
+   "t": 18.6,
+   "type": "step_pop",
+   "note": "étape 3 Création"
+  },
+  {
+   "t": 19.55,
+   "type": "step_pop",
+   "note": "étape 4 Validation"
+  },
+  {
+   "t": 20.5,
+   "type": "step_pop",
+   "note": "étape 5 Mise en ligne"
+  },
+  {
+   "t": 21.4,
+   "type": "ding",
+   "note": "le tube est plein, site en ligne"
+  },
+  {
+   "t": 21.85,
+   "type": "big_whoosh",
+   "note": "vague S8 -> S9"
+  },
+  {
+   "t": 22.0,
+   "type": "drop_impact",
+   "note": "SECOND DROP : offres, le groove revient"
+  },
+  {
+   "t": 22.2,
+   "type": "notif_pop",
+   "note": "carte Essentielle"
+  },
+  {
+   "t": 22.5,
+   "type": "notif_pop",
+   "note": "carte Premium"
+  },
+  {
+   "t": 22.8,
+   "type": "notif_pop",
+   "note": "carte Sur mesure"
+  },
+  {
+   "t": 23.5,
+   "type": "result_pop",
+   "note": "ligne 'Devis détaillé avant tout paiement'"
+  },
+  {
+   "t": 25.0,
+   "type": "big_whoosh",
+   "note": "vague S9 -> S5 (site réel)"
+  },
+  {
+   "t": 25.5,
+   "type": "tick",
+   "note": "mot 2"
+  },
+  {
+   "t": 26.0,
+   "type": "tick",
+   "note": "mot 3"
+  },
+  {
+   "t": 26.5,
+   "type": "tick",
+   "note": "mot 4"
+  },
+  {
+   "t": 27.0,
+   "type": "tick_accent",
+   "note": "jus presse"
+  },
+  {
+   "t": 27.5,
+   "type": "drip_fall",
+   "note": "goutte"
+  },
+  {
+   "t": 28.0,
+   "type": "final_hit",
+   "note": "coup final"
+  },
+  {
+   "t": 28.4,
+   "type": "soft_pop",
+   "note": "slogan"
+  },
+  {
+   "t": 28.8,
+   "type": "soft_pop",
+   "note": "CTA"
+  }
+ ]
+}

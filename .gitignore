@@ -1,0 +1,18 @@
+# Images de rendu vidéo (plusieurs Go, régénérables)
+video/final*/
+video/frames/
+video/out/
+video/test/
+video/review/
+# Masters vidéo (plus de 100 Mo, hors limite GitHub)
+*_master.mp4
+# Journaux et marqueurs de rendu
+*.log
+*.log_*
+*.done
+*.fail
+# Divers
+node_modules/
+__pycache__/
+.DS_Store
+Thumbs.db
