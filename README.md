@@ -7,8 +7,7 @@ Dossier de référence de l'agence juicecraft, à cloner sur chaque PC. Dépôt 
 |---|---|
 | `CLAUDE.md` | Contexte lu automatiquement par Claude Code : règles, décisions, prix, état, tâches en attente |
 | `DELEGATION.md` | Ce que Claude peut faire seul, après accord, ou jamais |
-| `index.html`, `build_deploy.py`, `shop.json` | Source du site vitrine et sa construction |
-| `deploy/index.html` | Site construit, prêt à publier |
+| `archives/` | Ancienne version du site vitrine (remplacée par le dépôt `juicecraft-site`) |
 | `logo/` | Logos, favicon, animations, planche de marque |
 | `video/` | Sources et scripts des vidéos publicitaires, bande-son |
 | `livrables/` | Fichiers livrés : vidéos web, zip du site, kit logos, bandes-son |
