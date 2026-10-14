@@ -15,7 +15,7 @@ Dossier de référence de l'agence juicecraft, à cloner sur chaque PC. Dépôt 
 | `docs/` | Audit, brouillon des mentions légales, liste avant ouverture |
 | `outils/` | Scripts de contrôle en lecture seule (Playwright) et scripts de correction utilisés |
 
-Absents volontairement : les images de rendu vidéo (12 Go, régénérables avec les scripts) et les masters vidéo de 130 Mo (au-delà de la limite de GitHub). Les masters sont joints à la version « masters-2026-10-10 » du dépôt (onglet Releases) quand l'envoi a réussi, sinon ils se régénèrent avec `video/redo30_franchise.sh` puis `video/encode30.sh`.
+Absents volontairement : les images de rendu vidéo (12 Go, régénérables avec les scripts). Les deux masters vidéo 30 s actuels sont dans `livrables/masters-morceaux/`, découpés en morceaux (mode d'emploi dans ce dossier) ; les anciens masters (« Sur devis », version TTC) ne sont pas conservés.
 
 ## Travailler sur deux PC
 1. Installer GitHub Desktop, se connecter, cloner `evannlassalle-prog/juicecraft-agence`.
