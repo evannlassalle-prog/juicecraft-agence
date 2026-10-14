@@ -1,0 +1,88 @@
+{
+  "archive": "JUICE_CRAFT_AGENCE_CONV2",
+  "cree_le": "2026-10-14",
+  "conversation": {
+    "session": "session_01L4uY6HcMT5UJbU2LVbtLDe",
+    "periode_utc": [
+      "2026-10-08T15:24",
+      "2026-10-14T09:55"
+    ],
+    "messages_utilisateur": 97,
+    "reponses_claude_textuelles": 153,
+    "compactages": 2
+  },
+  "emplacement": "github.com/evannlassalle-prog/juicecraft-agence : docs/archive-conv2/",
+  "fichiers": [
+    {
+      "fichier": "JUICE_CRAFT_AGENCE_ARCHIVE_COMPLETE_CONV2.md",
+      "description": "Archive détaillée chronologique de la conversation 2",
+      "octets": 21443,
+      "sha256": "84bfca5146c1d05417d23eec1233f0b0ce5c11a95d381f086f77768c1fd2b8f7"
+    },
+    {
+      "fichier": "JUICE_CRAFT_AGENCE_PROMPTS_CONV2.md",
+      "description": "Prompts et instructions (verbatim utilisateur, délégation, consignes, index des prompts d'agents)",
+      "octets": 12112,
+      "sha256": "295115de044b257a5dbbb63f8b5beff1fa4ae8fbf50a671158325790962ae5bb"
+    },
+    {
+      "fichier": "JUICE_CRAFT_AGENCE_TECHNIQUE_CONV2.md",
+      "description": "Configuration, code, intégrations, procédures et limites techniques",
+      "octets": 11970,
+      "sha256": "deb410358923deaf54448426e5fad6a86ef80d8218f261d7521cfe42287fed4e"
+    },
+    {
+      "fichier": "JUICE_CRAFT_AGENCE_TODO_CONV2.md",
+      "description": "État du projet : réalisé, abandonné, à faire, décisions en attente",
+      "octets": 4582,
+      "sha256": "d0b2195bfba41ab804164f9c96d7b64a67f6c309221f2ce791d443b23c6b28a1"
+    },
+    {
+      "fichier": "JUICE_CRAFT_PROJECT_CONTEXT_CONV2.md",
+      "description": "Contexte structuré pour le projet principal",
+      "octets": 3218,
+      "sha256": "7562212d5585dc87088614348c931a37bfa3e28e563c0792a296cb2681828f59"
+    },
+    {
+      "fichier": "sources/workflow-audit-complet.js",
+      "description": "Script exact du workflow d'audit (12 agents), copié depuis la session",
+      "octets": 32299,
+      "sha256": "956c5cdb6641bb0d7828f0347115e2b6742c2df3f91f9305c935a170ede5f5ac"
+    },
+    {
+      "fichier": "sources/workflow-revue-video-15s.js",
+      "description": "Script exact du workflow de revue critique de la vidéo 15 s",
+      "octets": 8818,
+      "sha256": "a98fbe3698f52d1a53fd8213748ed9942abb7c1269e65ffcb42f81d6022cac83"
+    },
+    {
+      "fichier": "sources/workflow-bande-son-15s.js",
+      "description": "Script exact du workflow de composition de la bande-son 15 s",
+      "octets": 7609,
+      "sha256": "40d826da57d33ea26939011285d25961ac7d60024cc5d61b3bd5a3c2bd9b19a7"
+    },
+    {
+      "fichier": "sources/routine-controle-hebdomadaire.txt",
+      "description": "Prompt exact de la routine du lundi (version du 10/10, périmée)",
+      "octets": 5604,
+      "sha256": "bed2505e496d9873dd6a0a68ea6f4ab917fd80e8ff2b888ba06a0603cf11f6e0"
+    }
+  ],
+  "sources_consultees": [
+    "Journal complet de la session /root/.claude/projects/-home-user/f760d948-6901-5abc-acf1-52b6d56910f4.jsonl (messages utilisateur et réponses de Claude, y compris les deux résumés de compactage)",
+    "Contexte courant de la conversation (messages depuis le 2026-10-10)",
+    "Scripts de workflows enregistrés par la session (3 fichiers, copiés dans sources/)",
+    "Routine trig_01SFGQNhiU8b94xsz6bP6xzv (lecture via get_trigger le 2026-10-14)",
+    "Dépôt juicecraft-agence (CLAUDE.md, DELEGATION.md, logo/LISEZ-MOI.txt, inventaire des fichiers)",
+    "Dépôt juicecraft-site : titres des 20 commits du 12 au 14/10, README.md, public/commande/offres.js (lus le 2026-10-14)",
+    "Boutique Shopify via le connecteur (lecture et archivage des produits, 2026-10-14)",
+    "Site https://juicecraft.fr en lecture (2026-10-14)"
+  ],
+  "non_recupere": [
+    "Contenu de la conversation « Automatisation juicecraft » (hors de cette session) : seules ses traces dans juicecraft-site sont connues",
+    "Rapport du contrôle hebdomadaire du 2026-10-12 (session cse_01RtJUA12ErndaRJtGXrYx6s, non lue)",
+    "Captures d'écran envoyées par l'utilisateur (OVH, FileZilla, Netlify, Appstle) : non conservées en image, seulement décrites dans les réponses",
+    "Contenu exact des pages légales du site actuel (non relu)",
+    "Réception réelle des e-mails du formulaire, fermeture effective de la boutique Shopify, validation NIS2"
+  ]
+}
