@@ -35,11 +35,11 @@ Le site, la commande et les prix vivent dans le dépôt `evannlassalle-prog/juic
 - `video/` : sources et scripts des pubs (`video30.html` = 30 s, `video.html` = 15 s), bande-son ; versions web dans `livrables/`, masters 30 s découpés dans `livrables/masters-morceaux/`. Les vidéos affichent l'ancienne grille (mise en place 290 / 590 / dès 1 690 €) : à refaire si les prix de création ont changé.
 - `archives/site-vitrine-2026-10-10/` : ancienne version mono-page du site et liens Shopify, remplacée par `juicecraft-site`. Ne plus l'utiliser.
 
-## Ancienne boutique Shopify
-juicecraft-store.myshopify.com (abonnements Appstle) n'est plus le canal de commande du site. Son avenir (fermeture, mise en pause ou maintien) reste à décider par le propriétaire ; tant que ses produits sont actifs, ils restent achetables avec l'ancienne grille.
+## Ancienne boutique Shopify (abandonnée le 2026-10-14)
+juicecraft-store.myshopify.com : les 6 produits sont archivés (plus rien à vendre, pages produits en 404). Une seule commande, de test (#1001). Fermeture définitive de la boutique et désinstallation d'Appstle : par le propriétaire dans l'administration Shopify. Ne plus rien y modifier.
 
 ## En attente (au 2026-10-14)
-1. Décider du sort de la boutique Shopify et des produits encore actifs.
+1. Fermer la boutique Shopify (désinstaller Appstle, puis désactiver la boutique) : action du propriétaire.
 2. Vidéos : vérifier si les prix affichés correspondent encore à `offres.js`.
 3. Contrôle du lundi : mettre à jour sa grille (il contrôle encore Shopify et l'ancien site).
 4. SIRET, médiateur de la consommation, relecture des pages légales par un professionnel.
